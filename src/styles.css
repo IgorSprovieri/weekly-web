@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #f0f0f0;
+}
+
+section.full-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  margin: 0px;
+}
+
+footer.left-footer {
+  width: 980px;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.3);
+}
+
+footer.right-footer {
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  background-color: white;
+
+  height: 100vh;
+  width: 300px;
+  margin: 0px;
+}
+
+h1 {
+  font-family: "Comfortaa", cursive;
+  font-size: 70px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h2 {
+  font-family: "Pacifico", cursive;
+  font-size: 44px;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h3 {
+  font-family: "Comfortaa", cursive;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h4 {
+  font-family: "Comfortaa", cursive;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h5 {
+  font-family: "Comfortaa", cursive;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h6 {
+  font-family: "Comfortaa", cursive;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+p {
+  font-family: "Comfortaa", cursive;
+  font-size: 12px;
+  font-weight: 300;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+input {
+  font-family: "Comfortaa", cursive;
+  font-size: 24px;
+  font-weight: 300;
+  color: rgb(200, 200, 200);
+  width: 260px;
+  height: 50px;
+}
+
+input.biggerinput {
+  font-family: "Comfortaa", cursive;
+  font-size: 24px;
+  font-weight: 300;
+  color: rgb(200, 200, 200);
+  width: 260px;
+  height: 150px;
+}
+
+button.salmon-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 22px;
+  font-weight: 400;
+  width: 220px;
+  height: 50px;
+
+  background-color: lightsalmon;
+
+  border: 0px;
+  border-radius: 25px;
+  margin: 0px;
+  padding: 0px;
+}
+
+button.white-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 22px;
+  font-weight: 400;
+  width: 220px;
+  height: 50px;
+
+  background-color: rgb(240, 240, 240);
+
+  border: 1px solid black;
+  border-radius: 25px;
+  margin: 0px;
+  padding: 0px;
+}
+
+button.little-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 26px;
+  font-weight: 600;
+  width: 90px;
+  height: 44px;
+
+  background-color: white;
+
+  border-radius: 12px;
+  margin: 10px 0px;
+  padding: 0px;
+}
+
+button.card-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 32px;
+  font-weight: 600;
+  width: 170px;
+  height: 70px;
+
+  background-color: white;
+
+  border-radius: 15px;
+  margin: 10px 0px;
+  padding: 0px;
+}
+
+div.input-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 25px 20px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 0px 0px;
+}
+
+div.card-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f0f0f0;
+
+  border: 3px solid #ff7a7a;
+  border-radius: 15px;
+  margin: 10px 0px;
+  padding: 0px;
+}
