@@ -1,0 +1,30 @@
+.input-section {
+  margin: 100px;
+}
+
+.input-container {
+  margin-top: 16px;
+}
+
+.input-title {
+  margin-bottom: 24px;
+}
+
+.written-container {
+  height: 50px;
+}
+
+.keyboard-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-container {
+  width: 480px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

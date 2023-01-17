@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly</title>
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="index.js"></script>
+  </head>
+  <body id="body-element" class="enterPage-animation">
+    <main id="main-container" class="full-screen">
+      <h2>Weekly</h2>
+      <section id="input-section" class="input-section">
+        <div class="input-box">
+          <h4 class="input-title">Login</h4>
+          <input id="email-input" type="email" placeholder="E-mail" />
+          <h5 hidden id="email-written" class="written-container"></h5>
+          <input
+            hidden
+            id="password-input"
+            class="password-input"
+            readonly="readonly"
+          />
+        </div>
+        <div hidden id="number-keyboard">
+          <div class="keyboard-container">
+            <button onclick="addPasswordNumber('1')" class="little-button">
+              1
+            </button>
+            <button onclick="addPasswordNumber('2')" class="little-button">
+              2
+            </button>
+            <button onclick="addPasswordNumber('3')" class="little-button">
+              3
+            </button>
+          </div>
+          <div class="keyboard-container">
+            <button onclick="addPasswordNumber('4')" class="little-button">
+              4
+            </button>
+            <button onclick="addPasswordNumber('5')" class="little-button">
+              5
+            </button>
+            <button onclick="addPasswordNumber('6')" class="little-button">
+              6
+            </button>
+          </div>
+          <div class="keyboard-container">
+            <button onclick="addPasswordNumber('7')" class="little-button">
+              7
+            </button>
+            <button onclick="addPasswordNumber('8')" class="little-button">
+              8
+            </button>
+            <button onclick="addPasswordNumber('9')" class="little-button">
+              9
+            </button>
+          </div>
+          <div class="keyboard-container">
+            <button class="little-button"></button>
+            <button onclick="addPasswordNumber('0')" class="little-button">
+              0
+            </button>
+            <button onclick="resetPasswordNumber()" class="little-button">
+              x
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="button-container">
+        <button onclick="openPage('../../index.html')" class="white-button">
+          Voltar
+        </button>
+        <button
+          id="continue-button"
+          onclick="onClickContinue()"
+          class="salmon-button"
+        >
+          Continuar
+        </button>
+        <button hidden id="reset-password" onclick="" class="green-button">
+          Redefinir a senha
+        </button>
+      </div>
+    </main>
+  </body>
+</html>

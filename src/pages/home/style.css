@@ -1,0 +1,19 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #f0f0f0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: white;
+  border-radius: 15px;
+  margin: 16px;
+  padding: 0px 32px;
+  height: 70px;
+  width: 60%;
+}

@@ -8,38 +8,6 @@ body {
   background-color: #f0f0f0;
 }
 
-section.full-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  height: 100vh;
-  margin: 0px;
-}
-
-footer.left-footer {
-  width: 980px;
-  height: 100vh;
-
-  background: rgba(0, 0, 0, 0.3);
-}
-
-footer.right-footer {
-  position: fixed;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  background-color: white;
-
-  height: 100vh;
-  width: 300px;
-  margin: 0px;
-}
-
 h1 {
   font-family: "Comfortaa", cursive;
   font-size: 70px;
@@ -52,6 +20,14 @@ h1 {
 h2 {
   font-family: "Pacifico", cursive;
   font-size: 44px;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+h2.small-icon {
+  font-family: "Pacifico", cursive;
+  font-size: 34px;
   text-align: center;
   margin: 0px;
   padding: 0px;
@@ -102,22 +78,50 @@ p {
   padding: 0px;
 }
 
+a {
+  color: black;
+  font-style: normal;
+}
 input {
   font-family: "Comfortaa", cursive;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   color: rgb(200, 200, 200);
   width: 260px;
   height: 50px;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding-left: 16px;
+}
+
+input.password-input {
+  font-family: "Comfortaa", cursive;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  color: rgb(200, 200, 200);
+  width: 260px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 25px;
 }
 
 input.biggerinput {
   font-family: "Comfortaa", cursive;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   color: rgb(200, 200, 200);
   width: 260px;
   height: 150px;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding-left: 16px;
+}
+
+button {
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
 }
 
 button.salmon-button {
@@ -150,6 +154,21 @@ button.white-button {
   padding: 0px;
 }
 
+button.green-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 22px;
+  font-weight: 100;
+  width: 220px;
+  height: 50px;
+
+  background-color: rgb(240, 240, 240);
+  color: #00a07a;
+
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
 button.little-button {
   font-family: "Comfortaa", cursive;
   font-size: 26px;
@@ -159,6 +178,7 @@ button.little-button {
 
   background-color: white;
 
+  border: 0px;
   border-radius: 12px;
   margin: 10px 0px;
   padding: 0px;
@@ -178,6 +198,38 @@ button.card-button {
   padding: 0px;
 }
 
+main.full-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  margin: 0px;
+}
+
+footer.left-footer {
+  width: 980px;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.3);
+}
+
+footer.right-footer {
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  background-color: white;
+
+  height: 100vh;
+  width: 300px;
+  margin: 0px;
+}
+
 div.input-box {
   display: flex;
   flex-direction: column;
@@ -187,7 +239,7 @@ div.input-box {
   padding: 25px 20px;
   background-color: white;
   border-radius: 20px;
-  margin: 0px 0px;
+  margin: 0px;
 }
 
 div.card-box {
@@ -202,4 +254,66 @@ div.card-box {
   border-radius: 15px;
   margin: 10px 0px;
   padding: 0px;
+}
+
+/*
+############################################
+ANIMATIONS
+*/
+
+.enterPage-animation {
+  animation-name: enterPage;
+  animation-duration: 4s;
+}
+
+.outPage-animation {
+  animation-name: outPage;
+  animation-duration: 1s;
+}
+
+@keyframes enterPage {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes outPage {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+
+button:hover {
+  animation-name: onHover;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+button:not(hover) {
+  animation-name: outHover;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes onHover {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes outHover {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
