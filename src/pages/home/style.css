@@ -1,7 +1,7 @@
 body {
-  margin: 0px;
-  padding: 0px;
-  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
@@ -15,5 +15,113 @@ header {
   margin: 16px;
   padding: 0px 32px;
   height: 70px;
-  width: 60%;
+  width: calc(100vw - 98px);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 8px;
+  height: calc(100vh - 264px);
+  width: calc(50vw - 98px);
+  padding: 16px;
+}
+
+.home-page-data-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 340px;
+  margin: 16px;
+}
+
+.home-page-date-input {
+  text-align: center;
+  width: 144px;
+  color: black;
+  background-color: rgb(255, 255, 255);
+  height: 40px;
+  border: 0px;
+  font-weight: 500;
+}
+
+.home-page-date-input::-webkit-datetime-edit-month-field {
+  color: black;
+}
+.home-page-date-input::-webkit-datetime-edit-day-field {
+  color: black;
+}
+.home-page-date-input::-webkit-datetime-edit-year-field {
+  color: black;
+}
+
+.home-page-data-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-page-week-days-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.home-page-week-day {
+  width: calc(100vw / 8);
+  margin: 0px 8px;
+}
+
+.home-page-lists-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.home-page-list-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: calc(100vw / 8);
+  margin: 0px 8px;
+}
+
+.home-page-add-button-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  height: 100px;
+  width: calc(100vw / 8);
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.home-page-button-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100px;
+  width: calc(100vw / 8);
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }

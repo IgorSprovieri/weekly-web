@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/IgorSprovieri/weekly-web/issues"
   },
-  "homepage": "https://github.com/IgorSprovieri/weekly-web#readme"
+  "homepage": "https://github.com/IgorSprovieri/weekly-web#readme",
+  "dependencies": {
+    "date-fns": "^2.29.3"
+  }
 }

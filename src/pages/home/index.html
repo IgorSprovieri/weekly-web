@@ -5,23 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weekly</title>
+    <link rel="stylesheet" href="../../styles.css" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
     <script src="index.js"></script>
   </head>
   <body>
     <header>
       <h2 class="small-icon">Weekly</h2>
-      <h5 id="user-name"></h5>
+      <button onclick="">
+        <h5 id="home-page-username-text"></h5>
+      </button>
       <button onclick="onClickExit()">
         <h5>sair</h5>
       </button>
     </header>
-    <main
-      class="margin-16px"
-      class="padding-0px-32px"
-      class="height-100vh"
-      class="width-50"
-      class="flex-column-center-flexStart"
-    ></main>
+    <div class="home-page-data-input-container">
+      <input
+        class="home-page-date-input"
+        type="date"
+        id="home-page-date-input"
+      />
+      <input
+        class="home-page-date-input"
+        type="date"
+        readonly="readonly"
+        id="home-page-final-date"
+      />
+    </div>
+
+    <main>
+      <div class="home-page-week-days-container">
+        <h5 id="week-day-0" class="home-page-week-day"></h5>
+        <h5 id="week-day-1" class="home-page-week-day"></h5>
+        <h5 id="week-day-2" class="home-page-week-day"></h5>
+        <h5 id="week-day-3" class="home-page-week-day"></h5>
+        <h5 id="week-day-4" class="home-page-week-day"></h5>
+        <h5 id="week-day-5" class="home-page-week-day"></h5>
+        <h5 id="week-day-6" class="home-page-week-day"></h5>
+      </div>
+      <div class="home-page-lists-container">
+        <div id="list-day-0" class="home-page-list-cards-container"></div>
+        <div id="list-day-1" class="home-page-list-cards-container"></div>
+        <div id="list-day-2" class="home-page-list-cards-container"></div>
+        <div id="list-day-3" class="home-page-list-cards-container"></div>
+        <div id="list-day-4" class="home-page-list-cards-container"></div>
+        <div id="list-day-5" class="home-page-list-cards-container"></div>
+        <div id="list-day-6" class="home-page-list-cards-container"></div>
+      </div>
+    </main>
   </body>
 </html>
