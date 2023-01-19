@@ -27,13 +27,14 @@ async function loadUser() {
 
 function setInitialDate() {
   const dateInput = document.getElementById("home-page-date-input");
-  const today = new Date().toISOString().split("T")[0];
+  let prevMonday = new Date();
+  prevMonday.setDate(prevMonday.getDate() - ((prevMonday.getDay() + 6) % 7));
 
-  dateInput.value = today;
+  dateInput.value = prevMonday.toISOString().split("T")[0];
   dateInput.addEventListener("change", () => {
     getAndRenderTasks();
   });
-  const finalDate = dateFns.addDays(today, 6).toISOString().split("T")[0];
+  const finalDate = dateFns.addDays(prevMonday, 6).toISOString().split("T")[0];
   document.getElementById("home-page-final-date").value = finalDate;
 }
 
