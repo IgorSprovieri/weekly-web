@@ -89,21 +89,57 @@ async function getAndRenderTasks() {
 
     tasks.map((task) => {
       if (task.initialDate > initialHour && task.initialDate < finalHour) {
-        const taskButton = document.createElement("button");
-        taskButton.classList.add("home-page-button-card");
+        const taskButton = document.createElement("div");
+        taskButton.classList.add("home-page-card");
+        taskButton.id = task._id;
         task.hexColor = task.hexColor + "ab";
         taskButton.style.backgroundColor = task.hexColor;
-        taskButton.innerHTML = `<h6>${
-          task.task
-        }</h6><p>${task.initialDate.slice(11, 16)} - ${task.finalDate.slice(
-          11,
-          16
-        )}</p>`;
+        if (task.checked == true) {
+          taskButton.innerHTML = `<h6><s>${
+            task.task
+          }</s></h6><p>${task.initialDate.slice(
+            11,
+            16
+          )} - ${task.finalDate.slice(11, 16)}</p>`;
+        } else {
+          taskButton.innerHTML = `<h6>${
+            task.task
+          }</h6><p>${task.initialDate.slice(11, 16)} - ${task.finalDate.slice(
+            11,
+            16
+          )}</p>`;
+        }
 
-        taskButton.onclick = () => {
-          onClickTask(task);
+        const imagesContainer = document.createElement("div");
+        const checkImg = document.createElement("img");
+        const editImg = document.createElement("img");
+        const deleteImg = document.createElement("img");
+
+        deleteImg.src = "../../../public/delete.svg";
+        checkImg.src = "../../../public/check.svg";
+        editImg.src = "../../../public/edit.svg";
+
+        deleteImg.style.height = "14px";
+        checkImg.style.height = "14px";
+        editImg.style.height = "14px";
+
+        editImg.style.margin = "0px 12px";
+
+        checkImg.onclick = () => {
+          onClickCheckTask(task);
+        };
+        editImg.onclick = () => {
+          onClickEditTask(task);
+        };
+        deleteImg.onclick = () => {
+          onClickDeleteTask(task);
         };
 
+        imagesContainer.appendChild(checkImg);
+        imagesContainer.appendChild(editImg);
+        imagesContainer.appendChild(deleteImg);
+
+        taskButton.appendChild(imagesContainer);
         listDayElement.appendChild(taskButton);
       }
     });
@@ -241,10 +277,6 @@ function onClickBackAddTask() {
   document.getElementById("add-task").hidden = true;
 }
 
-function onClickTask(task) {
-  window.alert(task._id);
-}
-
 function onClickPreviousWeek() {
   const dateInput = document.getElementById("home-page-date-input");
   const startDate = dateFns
@@ -271,4 +303,40 @@ function onClickNextWeek() {
   document.getElementById("home-page-final-date").value = finalDate;
 
   getAndRenderTasks();
+}
+
+function onClickCheckTask(task) {
+  window.alert(task.checked);
+}
+
+function onClickEditTask(task) {
+  window.alert("Edit Task: " + task._id);
+}
+
+async function onClickDeleteTask(task) {
+  const token = localStorage.getItem("@Weekly:token");
+  const email = localStorage.getItem("@Weekly:userEmail");
+
+  try {
+    const result = await fetch(
+      `https://weekly.herokuapp.com/task/${task._id}`,
+      {
+        method: "delete",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+          email: email,
+        },
+      }
+    );
+    await result.json();
+    document.getElementById(task._id).remove();
+    return;
+  } catch (error) {
+    window.alert("Erro ao deletar tarefa: " + error);
+    return;
+  }
 }
