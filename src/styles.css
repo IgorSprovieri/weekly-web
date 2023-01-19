@@ -195,28 +195,6 @@ main.full-screen {
   margin: 0px;
 }
 
-footer.left-footer {
-  width: 980px;
-  height: 100vh;
-
-  background: rgba(0, 0, 0, 0.3);
-}
-
-footer.right-footer {
-  position: fixed;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  background-color: white;
-
-  height: 100vh;
-  width: 300px;
-  margin: 0px;
-}
-
 div.input-box {
   display: flex;
   flex-direction: column;

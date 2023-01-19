@@ -10,7 +10,7 @@
     <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
     <script src="index.js"></script>
   </head>
-  <body>
+  <body id="body-element" class="enterPage-animation">
     <header>
       <h2 class="small-icon">Weekly</h2>
       <button onclick="">
@@ -54,5 +54,58 @@
         <div id="list-day-6" class="home-page-list-cards-container"></div>
       </div>
     </main>
+
+    <div id="add-task" class="add-task-container" hidden="true">
+      <aside class="left-aside"></aside>
+      <aside class="right-aside">
+        <div class="add-task-content-container">
+          <h4>Adicionar Tarefa</h4>
+          <input id="add-task-day" class="home-page-date-input" type="date" />
+          <input id="add-task-task" type="text" placeholder="Tarefa" />
+          <div class="add-task-hour-container">
+            <input
+              class="add-task-time-input"
+              id="add-task-initial-Hour"
+              type="time"
+            />
+            <h4>&rarr;</h4>
+            <input
+              class="add-task-time-input"
+              id="add-task-final-Hour"
+              type="time"
+            />
+          </div>
+          <input id="add-task-color" list="app-colors" type="color" />
+          <input
+            id="add-task-description"
+            type="text"
+            placeholder="Descrição"
+          />
+          <div class="add-task-checkbox-container">
+            <input id="add-task-checked" type="checkbox" />
+            <p>Concluída</p>
+          </div>
+          <div class="add-task-button-container">
+            <button
+              onclick="onClickBackAddTask()"
+              class="add-task-white-button"
+            >
+              Voltar
+            </button>
+            <button onclick="onClickAddTask()" class="add-task-salmon-button">
+              Criar
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <datalist id="app-colors">
+      <option value="#FFFFFF"></option>
+      <option value="#FFA07A"></option>
+      <option value="#00A07A"></option>
+      <option value="#7A87FF"></option>
+      <option value="#005F85"></option>
+      <option value="#FF7A7A"></option>
+    </datalist>
   </body>
 </html>

@@ -18,6 +18,33 @@ header {
   width: calc(100vw - 98px);
 }
 
+aside.left-aside {
+  position: fixed;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.1);
+}
+
+aside.right-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  right: 0px;
+
+  height: calc(100vh - 32px);
+  width: 400px;
+  margin: 16px;
+}
+
+aside.right-aside[hidden="true"] {
+  flex: none;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -124,4 +151,97 @@ header {
   margin-bottom: 16px;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+.add-task-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+.add-task-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 70vh;
+  background-color: white;
+  border-radius: 20px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+.add-task-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 260px;
+}
+
+.add-task-hour-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 280px;
+}
+
+.add-task-time-input {
+  width: 80px;
+  color: black;
+}
+
+.add-task-button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 90%;
+}
+
+button.add-task-salmon-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 22px;
+  font-weight: 400;
+  width: 140px;
+  height: 50px;
+
+  background-color: lightsalmon;
+
+  border: 0px;
+  border-radius: 25px;
+  margin: 0px;
+  padding: 0px;
+}
+
+button.add-task-white-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 22px;
+  font-weight: 400;
+  width: 140px;
+  height: 50px;
+
+  background-color: rgb(255, 255, 255);
+
+  border: 1px solid black;
+  border-radius: 25px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.right-animation {
+  animation-name: rightAnimation;
+  animation-duration: 10s;
+}
+
+@keyframes rightAnimation {
+  0% {
+    transform: translateX(400);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
