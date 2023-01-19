@@ -160,24 +160,6 @@ aside.right-aside {
   animation-fill-mode: forwards;
 }
 
-@keyframes cardOnHover {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes cardOutHover {
-  0% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
 .add-task-container {
   height: 100vh;
   width: 100vw;
@@ -196,15 +178,6 @@ aside.right-aside {
   padding-bottom: 8px;
 }
 
-.add-task-checkbox-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-
-  width: 260px;
-}
-
 .add-task-hour-container {
   display: flex;
   flex-direction: row;
@@ -217,6 +190,41 @@ aside.right-aside {
 .add-task-time-input {
   width: 80px;
   color: black;
+}
+.add-task-color-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 280px;
+}
+
+.add-task-color {
+  width: 200px;
+  height: 42px;
+  padding: 4px 4px;
+}
+
+.add-task-color::-webkit-color-swatch {
+  border: none;
+  border-radius: 50px;
+  padding: 0;
+}
+
+.add-task-color::-webkit-color-swatch-wrapper {
+  border: none;
+  border-radius: 50px;
+  padding: 0;
+}
+
+.add-task-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 280px;
 }
 
 .add-task-button-container {

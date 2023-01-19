@@ -89,7 +89,7 @@ async function getAndRenderTasks() {
 
     tasks.map((task) => {
       if (task.initialDate > initialHour && task.initialDate < finalHour) {
-        const taskButton = document.createElement("div");
+        const taskButton = document.createElement("button");
         taskButton.classList.add("home-page-card");
         taskButton.id = task._id;
         task.hexColor = task.hexColor + "ab";
@@ -153,8 +153,6 @@ async function getAndRenderTasks() {
     listDayElement.appendChild(addButton);
     listsContainer.appendChild(listDayElement);
   });
-
-  console.log(listsContainer.innerHTML);
 }
 
 const tryGetTasks = async (initialDate, finalDate, token, email) => {
@@ -305,8 +303,42 @@ function onClickNextWeek() {
   getAndRenderTasks();
 }
 
-function onClickCheckTask(task) {
-  window.alert(task.checked);
+async function onClickCheckTask(task) {
+  try {
+    const token = localStorage.getItem("@Weekly:token");
+    const email = localStorage.getItem("@Weekly:userEmail");
+    task.checked = !task.checked;
+
+    const result = await fetch(
+      `https://weekly.herokuapp.com/task/${task._id}`,
+      {
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          Authorization: "Bearer " + token,
+          email: email,
+        },
+        body: {
+          checked: task.checked.toString(),
+        },
+      }
+    );
+    await result.json();
+
+    const taskText = document.getElementById(task._id).firstElementChild;
+    if (task.checked == true) {
+      taskText.innerHTML = `<h6><s>${task.task}</s><h6>`;
+    } else {
+      taskText.innerHTML = `<h6>${task.task}<h6>`;
+    }
+
+    return;
+  } catch (error) {
+    window.alert("Erro ao concluir tarefa: " + error);
+    return;
+  }
 }
 
 function onClickEditTask(task) {
@@ -314,10 +346,10 @@ function onClickEditTask(task) {
 }
 
 async function onClickDeleteTask(task) {
-  const token = localStorage.getItem("@Weekly:token");
-  const email = localStorage.getItem("@Weekly:userEmail");
-
   try {
+    const token = localStorage.getItem("@Weekly:token");
+    const email = localStorage.getItem("@Weekly:userEmail");
+
     const result = await fetch(
       `https://weekly.herokuapp.com/task/${task._id}`,
       {
@@ -336,7 +368,7 @@ async function onClickDeleteTask(task) {
     document.getElementById(task._id).remove();
     return;
   } catch (error) {
-    window.alert("Erro ao deletar tarefa: " + error);
+    window.alert("Erro ao deletar tarefa");
     return;
   }
 }
