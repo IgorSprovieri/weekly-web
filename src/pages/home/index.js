@@ -32,6 +32,12 @@ function setInitialDate() {
 
   dateInput.value = prevMonday.toISOString().split("T")[0];
   dateInput.addEventListener("change", () => {
+    const dateInput = document.getElementById("home-page-date-input");
+    const finalDate = dateFns
+      .addDays(dateInput.value, 6)
+      .toISOString()
+      .split("T")[0];
+    document.getElementById("home-page-final-date").value = finalDate;
     getAndRenderTasks();
   });
   const finalDate = dateFns.addDays(prevMonday, 6).toISOString().split("T")[0];
@@ -44,6 +50,9 @@ async function getAndRenderTasks() {
   const email = localStorage.getItem("@Weekly:userEmail");
   const initialDate = document.getElementById("home-page-date-input").value;
   const finalDate = document.getElementById("home-page-final-date").value;
+  const listsContainer = document.getElementById("home-page-lists-container");
+  document.getElementById("loading-hidden-content").hidden = false;
+  listsContainer.innerHTML = "";
 
   const result = await tryGetTasks(initialDate, finalDate, token, email);
   if (result.error) {
@@ -70,9 +79,11 @@ async function getAndRenderTasks() {
     return;
   }
 
-  weekDays.map((day, i) => {
-    const listDayElement = document.getElementById("list-day-" + i);
-    listDayElement.innerHTML = "";
+  document.getElementById("loading-hidden-content").hidden = true;
+
+  weekDays.map((day) => {
+    const listDayElement = document.createElement("div");
+    listDayElement.classList.add("home-page-list-cards-container");
     const initialHour = day + "T00:00:00.000Z";
     const finalHour = day + "T23:59:59.000Z";
 
@@ -82,14 +93,12 @@ async function getAndRenderTasks() {
         taskButton.classList.add("home-page-button-card");
         task.hexColor = task.hexColor + "ab";
         taskButton.style.backgroundColor = task.hexColor;
-        taskButton.innerHTML =
-          "<h6>" +
-          task.task +
-          "</h6><p>" +
-          task.initialDate.slice(11, 16) +
-          " - " +
-          task.finalDate.slice(11, 16) +
-          "</p>";
+        taskButton.innerHTML = `<h6>${
+          task.task
+        }</h6><p>${task.initialDate.slice(11, 16)} - ${task.finalDate.slice(
+          11,
+          16
+        )}</p>`;
 
         taskButton.onclick = () => {
           onClickTask(task);
@@ -106,7 +115,10 @@ async function getAndRenderTasks() {
       onClickAddTaskCardButton(day.toString());
     };
     listDayElement.appendChild(addButton);
+    listsContainer.appendChild(listDayElement);
   });
+
+  console.log(listsContainer.innerHTML);
 }
 
 const tryGetTasks = async (initialDate, finalDate, token, email) => {
@@ -231,4 +243,32 @@ function onClickBackAddTask() {
 
 function onClickTask(task) {
   window.alert(task._id);
+}
+
+function onClickPreviousWeek() {
+  const dateInput = document.getElementById("home-page-date-input");
+  const startDate = dateFns
+    .addDays(dateInput.value, -7)
+    .toISOString()
+    .split("T")[0];
+  const finalDate = dateFns.addDays(startDate, 6).toISOString().split("T")[0];
+
+  dateInput.value = startDate;
+  document.getElementById("home-page-final-date").value = finalDate;
+
+  getAndRenderTasks();
+}
+
+function onClickNextWeek() {
+  const dateInput = document.getElementById("home-page-date-input");
+  const startDate = dateFns
+    .addDays(dateInput.value, 7)
+    .toISOString()
+    .split("T")[0];
+  const finalDate = dateFns.addDays(startDate, 6).toISOString().split("T")[0];
+
+  dateInput.value = startDate;
+  document.getElementById("home-page-final-date").value = finalDate;
+
+  getAndRenderTasks();
 }

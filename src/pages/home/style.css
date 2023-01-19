@@ -24,7 +24,7 @@ aside.left-aside {
   width: 100vw;
   height: 100vh;
 
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 aside.right-aside {
@@ -39,10 +39,6 @@ aside.right-aside {
   height: calc(100vh - 32px);
   width: 400px;
   margin: 16px;
-}
-
-aside.right-aside[hidden="true"] {
-  flex: none;
 }
 
 .main {
@@ -64,7 +60,7 @@ aside.right-aside[hidden="true"] {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 340px;
+  width: 520px;
   margin: 16px;
 }
 
@@ -232,16 +228,58 @@ button.add-task-white-button {
   padding: 0px;
 }
 
-.right-animation {
-  animation-name: rightAnimation;
-  animation-duration: 10s;
+.loading-hidden-content {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 
-@keyframes rightAnimation {
+.loading-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loading-animation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  animation: loading 2s infinite forwards;
+}
+.loading-left {
+  width: 50px;
+  height: 30px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-top: 10px solid salmon;
+  border-left: 10px solid salmon;
+  border-bottom: 10px solid salmon;
+}
+
+.loading-right {
+  width: 50px;
+  height: 30px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top: 10px solid rgba(255, 255, 255, 0);
+  border-right: 10px solid salmon;
+  border-bottom: 10px solid salmon;
+}
+
+@keyframes loading {
   0% {
-    transform: translateX(400);
+    transform: rotate(0deg);
   }
   100% {
-    transform: translateX(0);
+    transform: rotate(359deg);
   }
 }

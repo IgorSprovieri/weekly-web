@@ -21,6 +21,7 @@
       </button>
     </header>
     <div class="home-page-data-input-container">
+      <button onclick="onClickPreviousWeek()" class="small-button">&larr;</button>
       <input
         class="home-page-date-input"
         type="date"
@@ -32,27 +33,20 @@
         readonly="readonly"
         id="home-page-final-date"
       />
+      <button onclick="onClickNextWeek()" class="small-button">&rarr;</button>
     </div>
 
     <main>
       <div class="home-page-week-days-container">
-        <h5 id="week-day-0" class="home-page-week-day"></h5>
-        <h5 id="week-day-1" class="home-page-week-day"></h5>
-        <h5 id="week-day-2" class="home-page-week-day"></h5>
-        <h5 id="week-day-3" class="home-page-week-day"></h5>
-        <h5 id="week-day-4" class="home-page-week-day"></h5>
-        <h5 id="week-day-5" class="home-page-week-day"></h5>
-        <h5 id="week-day-6" class="home-page-week-day"></h5>
+        <h5 id="week-day-0" class="home-page-week-day">S</h5>
+        <h5 id="week-day-1" class="home-page-week-day">T</h5>
+        <h5 id="week-day-2" class="home-page-week-day">Q</h5>
+        <h5 id="week-day-3" class="home-page-week-day">Q</h5>
+        <h5 id="week-day-4" class="home-page-week-day">S</h5>
+        <h5 id="week-day-5" class="home-page-week-day">S</h5>
+        <h5 id="week-day-6" class="home-page-week-day">D</h5>
       </div>
-      <div class="home-page-lists-container">
-        <div id="list-day-0" class="home-page-list-cards-container"></div>
-        <div id="list-day-1" class="home-page-list-cards-container"></div>
-        <div id="list-day-2" class="home-page-list-cards-container"></div>
-        <div id="list-day-3" class="home-page-list-cards-container"></div>
-        <div id="list-day-4" class="home-page-list-cards-container"></div>
-        <div id="list-day-5" class="home-page-list-cards-container"></div>
-        <div id="list-day-6" class="home-page-list-cards-container"></div>
-      </div>
+      <div id="home-page-lists-container" class="home-page-lists-container">
     </main>
 
     <div id="add-task" class="add-task-container" hidden="true">
@@ -104,6 +98,17 @@
         </div>
       </aside>
     </div>
+
+    <div id="loading-hidden-content" class="loading-hidden-content">
+      <div class="loading-content">
+        <div class="loading-animation">
+          <div class="loading-left"></div>
+          <div class="loading-right"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <datalist id="app-colors">
       <option value="#FFFFFF"></option>
       <option value="#FFA07A"></option>

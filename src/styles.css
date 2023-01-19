@@ -185,6 +185,21 @@ button.little-button {
   padding: 0px;
 }
 
+button.small-button {
+  font-family: "Comfortaa", cursive;
+  font-size: 20px;
+  font-weight: 600;
+  width: 90px;
+  height: 40px;
+
+  background-color: white;
+
+  border: 0px;
+  border-radius: 20px;
+  margin: 10px 0px;
+  padding: 0px;
+}
+
 main.full-screen {
   display: flex;
   flex-direction: column;
@@ -213,16 +228,16 @@ ANIMATIONS
 */
 
 .enterPage-animation {
-  animation-name: enterPage;
+  animation-name: fadeIn;
   animation-duration: 4s;
 }
 
 .outPage-animation {
-  animation-name: outPage;
+  animation-name: fadeOut;
   animation-duration: 1s;
 }
 
-@keyframes enterPage {
+@keyframes fadeIn {
   0% {
     opacity: 0%;
   }
@@ -231,7 +246,7 @@ ANIMATIONS
   }
 }
 
-@keyframes outPage {
+@keyframes fadeOut {
   0% {
     opacity: 100%;
   }
