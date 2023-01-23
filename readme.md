@@ -1,6 +1,6 @@
 # Weekly - Task Manager App
 
-<img src="./public/logo.png" alt="Weekly Logo" width="100%">
+<img src="./public/Logo.png" alt="Weekly Logo" width="100%">
 
 ## Description
 
