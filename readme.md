@@ -32,10 +32,11 @@ https://github.com/IgorSprovieri/weekly-web/blob/main/public/preview.mp4
 
 The demo is available
 
-### it's in development
+### It's in development
 
 - Forgot and Reset Password Pages
 - Edit Profile Page
+- Media Query for mobile
 
 ## Used Technologies
 
