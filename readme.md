@@ -14,10 +14,15 @@ The main objective is the user organizate your week in a visual app with cards
 
 ## Demo
 
-<video width="70%" controls>
-  <source src="./public/preview.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+<img src="./public/preview.gif" alt="Weekly Gif Preview" width="50%">
+
+### Downloading the video
+
+1. Download the file:
+
+```
+https://github.com/IgorSprovieri/weekly-web/blob/main/public/preview.mp4
+```
 
 ## Live Application
 
