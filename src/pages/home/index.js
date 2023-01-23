@@ -88,7 +88,6 @@ async function setInitialDate() {
 }
 
 async function getAndRenderTasks() {
-  const weekDays = [];
   const initialDate = document.getElementById("home-page-date-input").value;
   const finalDate = document.getElementById("home-page-final-date").value;
   const listsContainer = document.getElementById("home-page-lists-container");
@@ -96,17 +95,13 @@ async function getAndRenderTasks() {
   listsContainer.innerHTML = "";
 
   const tasks = await tryGetTasks(initialDate, finalDate);
-  if (tasks.error) {
-    window.alert(tasks.error);
-    return;
+  const weekDays = await tryGetListOfDays(initialDate, 7);
+
+  if (tasks.error || weekDays.error) {
+    return window.alert("Erro ao carregar as tarefas");
   }
 
-  const list = [0, 1, 2, 3, 4, 5, 6];
-  let dateAux = new Date(initialDate);
-  for (const element of list) {
-    weekDays.push(dateAux.toISOString().split("T")[0]);
-    dateAux = await tryGetAddDays(dateAux, 1);
-  }
+  document.getElementById("home-page-loading").style.display = "none";
 
   function getWeekDay(date) {
     let days = ["S", "T", "Q", "Q", "S", "S", "D"];
@@ -118,12 +113,6 @@ async function getAndRenderTasks() {
       new Date(weekDay)
     );
   });
-
-  if (tasks.error) {
-    return window.alert("Erro ao carregar as tarefas");
-  }
-
-  document.getElementById("home-page-loading").style.display = "none";
 
   weekDays.map((day) => {
     const listDayElement = document.createElement("div");
@@ -413,6 +402,19 @@ const tryGetAddDays = async (date, days) => {
     );
     const data = await result.json();
     return new Date(data.result);
+  } catch (error) {
+    return { error };
+  }
+};
+
+const tryGetListOfDays = async (date, days) => {
+  try {
+    date = new Date(date).toISOString().split("T")[0];
+    const result = await fetch(
+      `https://weekly.herokuapp.com/list-of-days/?date=${date}T08%3A00%3A00.000Z&days=${days}`
+    );
+    const data = await result.json();
+    return data.result;
   } catch (error) {
     return { error };
   }
