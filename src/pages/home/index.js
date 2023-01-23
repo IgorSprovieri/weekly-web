@@ -156,16 +156,20 @@ async function getAndRenderTasks() {
         const checkImg = document.createElement("img");
         const editImg = document.createElement("img");
         const deleteImg = document.createElement("img");
+        const infoImg = document.createElement("img");
 
         deleteImg.src = "../../../public/delete.svg";
         checkImg.src = "../../../public/check.svg";
         editImg.src = "../../../public/edit.svg";
+        infoImg.src = "../../../public/info.svg";
 
         deleteImg.style.height = "16px";
         checkImg.style.height = "16px";
         editImg.style.height = "16px";
+        infoImg.style.height = "16px";
 
-        editImg.style.margin = "0px 12px";
+        editImg.style.margin = "0px 6px 0px 3px";
+        infoImg.style.margin = "0px 3px 0px 6px";
 
         checkImg.onclick = () => {
           onClickCheckTask(task);
@@ -176,8 +180,12 @@ async function getAndRenderTasks() {
         deleteImg.onclick = () => {
           onClickDeleteTask(task);
         };
+        infoImg.onclick = () => {
+          onClickinfoTask(task);
+        };
 
         imagesContainer.appendChild(checkImg);
+        imagesContainer.appendChild(infoImg);
         imagesContainer.appendChild(editImg);
         imagesContainer.appendChild(deleteImg);
 
@@ -240,6 +248,27 @@ function onClickAddTaskCardButton(date) {
   document.getElementById("form-submit-button").onclick = () => {
     onClickSubmitAddTask();
   };
+}
+
+async function onClickDeleteTask(task) {
+  const result = await tryDeleteTask(task._id);
+
+  if (result.error) {
+    return window.alert("Não foi possível deletar a tarefa");
+  }
+
+  document.getElementById(task._id).remove();
+}
+
+function onClickinfoTask(task) {
+  const infoSection = document.getElementById("info-section");
+  infoSection.hidden = false;
+  const infoDescription = document.getElementById("info-container-description");
+  if (task.description == "") {
+    infoDescription.innerText = "Sem descrição";
+  } else {
+    infoDescription.innerText = task.description;
+  }
 }
 
 async function onClickCheckTask(task) {
@@ -359,6 +388,15 @@ async function onClickSubmitEditTask(taskId) {
 
 function onClickBackForm() {
   document.getElementById("form-section").hidden = true;
+}
+
+/*
+###########################################################
+Info Section Functions
+*/
+
+function onClickHiddenInfoSection() {
+  document.getElementById("info-section").hidden = true;
 }
 
 /*

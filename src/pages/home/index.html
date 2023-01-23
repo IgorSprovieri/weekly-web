@@ -50,7 +50,7 @@
     </main>
 
     <section id="form-section" class="form-section" hidden="true">
-      <aside class="left-aside"></aside>
+      <section class="black-background"></section>
       <aside class="right-aside">
         <form id="task-form" class="form-container">
           <h4 id="form-title">Adicionar Tarefa</h4>
@@ -104,6 +104,24 @@
           </div>
         </form>
       </aside>
+    </section>
+
+    <section id="info-section" class="info-section" hidden="true">
+      <section class="black-background"></section>
+      <footer>
+        <div class="info-container">
+          <h4>Descrição</h4>
+          <h5 id="info-container-description" class="info-description"></h5>
+          <div class="info-button-container">
+            <button
+            onclick="onClickHiddenInfoSection()"
+            class="form-white-button"
+            >
+            Voltar
+            </button>
+          </div>
+        </div>
+      </footer>
     </section>
 
     <div id="home-page-loading" class="loading-content">
