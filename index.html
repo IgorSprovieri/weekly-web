@@ -3,7 +3,16 @@
   <head>
     <script>
       window.onload = () => {
-        window.open("./src/index.html", "_self");
+        const token = localStorage.getItem("@Weekly:token");
+        const userId = localStorage.getItem("@Weekly:user_id");
+        const userName = localStorage.getItem("@Weekly:userName");
+        const userEmail = localStorage.getItem("@Weekly:userEmail");
+
+        if (!token || !userId || !userName || !userEmail) {
+          return window.open("./src/index.html", "_self");
+        }
+
+        window.open("./src/pages/home/index.html", "_self");
       };
     </script>
   </head>
