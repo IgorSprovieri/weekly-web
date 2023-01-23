@@ -22,11 +22,11 @@ function onClickExit() {
 onload Functions
 */
 
-window.onload = () => {
-  loadUser();
-  getAppColors();
-  setInitialDate();
-  getAndRenderTasks();
+window.onload = async () => {
+  await loadUser();
+  await getAppColors();
+  await setInitialDate();
+  await getAndRenderTasks();
 
   const form = document.getElementById("task-form");
   form.onsubmit = (event) => {
@@ -64,7 +64,7 @@ async function getAppColors() {
   });
 }
 
-function setInitialDate() {
+async function setInitialDate() {
   const dateInput = document.getElementById("home-page-date-input");
   let previousMonday = new Date();
   previousMonday.setDate(
@@ -72,21 +72,19 @@ function setInitialDate() {
   );
 
   dateInput.value = previousMonday.toISOString().split("T")[0];
-  dateInput.addEventListener("change", () => {
+  dateInput.addEventListener("change", async () => {
     const dateInput = document.getElementById("home-page-date-input");
-    const finalDate = dateFns
-      .addDays(dateInput.value, 6)
+    const finalDate = await tryGetAddDays(dateInput.value, 6);
+    document.getElementById("home-page-final-date").value = finalDate
       .toISOString()
       .split("T")[0];
-    document.getElementById("home-page-final-date").value = finalDate;
     getAndRenderTasks();
   });
 
-  const finalDate = dateFns
-    .addDays(previousMonday, 6)
+  const finalDate = await tryGetAddDays(previousMonday, 6);
+  document.getElementById("home-page-final-date").value = finalDate
     .toISOString()
     .split("T")[0];
-  document.getElementById("home-page-final-date").value = finalDate;
 }
 
 async function getAndRenderTasks() {
@@ -97,10 +95,17 @@ async function getAndRenderTasks() {
   document.getElementById("home-page-loading").style.display = "flex";
   listsContainer.innerHTML = "";
 
-  const result = await tryGetTasks(initialDate, finalDate);
-  if (result.error) {
-    window.alert(result.error);
+  const tasks = await tryGetTasks(initialDate, finalDate);
+  if (tasks.error) {
+    window.alert(tasks.error);
     return;
+  }
+
+  const list = [0, 1, 2, 3, 4, 5, 6];
+  let dateAux = new Date(initialDate);
+  for (const element of list) {
+    weekDays.push(dateAux.toISOString().split("T")[0]);
+    dateAux = await tryGetAddDays(dateAux, 1);
   }
 
   function getWeekDay(date) {
@@ -108,14 +113,11 @@ async function getAndRenderTasks() {
     return days[date.getDay()];
   }
 
-  let dateAux = new Date(initialDate);
-  for (let i = 0; i < 7; i++) {
-    document.getElementById("week-day-" + i).innerText = getWeekDay(dateAux);
-    weekDays.push(dateAux.toISOString().split("T")[0]);
-    dateAux = dateFns.addDays(dateAux, 1);
-  }
-
-  const tasks = await tryGetTasks(initialDate, finalDate);
+  weekDays.map((weekDay, i) => {
+    document.getElementById("week-day-" + i).innerText = getWeekDay(
+      new Date(weekDay)
+    );
+  });
 
   if (tasks.error) {
     return window.alert("Erro ao carregar as tarefas");
@@ -217,16 +219,15 @@ function onClickNextWeek() {
   addDaysOnCalendar(7);
 }
 
-function addDaysOnCalendar(days) {
+async function addDaysOnCalendar(days) {
   const dateInput = document.getElementById("home-page-date-input");
-  const startDate = dateFns
-    .addDays(dateInput.value, days)
+  const startDate = await tryGetAddDays(dateInput.value, days);
+  const finalDate = await tryGetAddDays(startDate, 6);
+
+  dateInput.value = startDate.toISOString().split("T")[0];
+  document.getElementById("home-page-final-date").value = finalDate
     .toISOString()
     .split("T")[0];
-  const finalDate = dateFns.addDays(startDate, 6).toISOString().split("T")[0];
-
-  dateInput.value = startDate;
-  document.getElementById("home-page-final-date").value = finalDate;
 
   getAndRenderTasks();
 }
@@ -403,6 +404,19 @@ function onClickHiddenInfoSection() {
 ###########################################################
 API Requests
 */
+
+const tryGetAddDays = async (date, days) => {
+  try {
+    date = new Date(date).toISOString().split("T")[0];
+    const result = await fetch(
+      `https://weekly.herokuapp.com/addDays/?date=${date}T08%3A00%3A00.000Z&days=${days}`
+    );
+    const data = await result.json();
+    return new Date(data.result);
+  } catch (error) {
+    return { error };
+  }
+};
 
 const tryGetAppColors = async () => {
   try {
