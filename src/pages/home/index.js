@@ -47,7 +47,7 @@ async function loadUser() {
   const result = tryGetUser();
 
   if (result.error) {
-    return openPage("../../index.html");
+    return openPage("../../../index.html");
   }
 
   document.getElementById("home-page-username-text").innerText = userName;
