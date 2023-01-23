@@ -1,8 +1,37 @@
+function openPage(url) {
+  document
+    .getElementById("body-element")
+    .classList.remove("enterPage-animation");
+  document.getElementById("body-element").classList.add("outPage-animation");
+  setTimeout(() => {
+    window.open(url, "_self");
+  }, 1000);
+}
+
+function onClickExit() {
+  localStorage.removeItem("@Weekly:token");
+  localStorage.removeItem("@Weekly:user_id");
+  localStorage.removeItem("@Weekly:userName");
+  localStorage.removeItem("@Weekly:userEmail");
+
+  openPage("../../index.html");
+}
+
+/*
+####################################################
+onload Functions
+*/
+
 window.onload = () => {
   loadUser();
   getAppColors();
   setInitialDate();
   getAndRenderTasks();
+
+  const form = document.getElementById("task-form");
+  form.onsubmit = (event) => {
+    event.preventDefault();
+  };
 };
 
 async function loadUser() {
@@ -132,9 +161,9 @@ async function getAndRenderTasks() {
         checkImg.src = "../../../public/check.svg";
         editImg.src = "../../../public/edit.svg";
 
-        deleteImg.style.height = "14px";
-        checkImg.style.height = "14px";
-        editImg.style.height = "14px";
+        deleteImg.style.height = "16px";
+        checkImg.style.height = "16px";
+        editImg.style.height = "16px";
 
         editImg.style.margin = "0px 12px";
 
@@ -168,72 +197,10 @@ async function getAndRenderTasks() {
   });
 }
 
-function openPage(url) {
-  document
-    .getElementById("body-element")
-    .classList.remove("enterPage-animation");
-  document.getElementById("body-element").classList.add("outPage-animation");
-  setTimeout(() => {
-    window.open(url, "_self");
-  }, 1000);
-}
-
 /*
 ####################################################
-onClick functions
+Calendar Functions
 */
-
-function onClickExit() {
-  localStorage.removeItem("@Weekly:token");
-  localStorage.removeItem("@Weekly:user_id");
-  localStorage.removeItem("@Weekly:userName");
-  localStorage.removeItem("@Weekly:userEmail");
-
-  openPage("../../index.html");
-}
-
-function onClickAddTaskCardButton(date) {
-  document.getElementById("add-task").hidden = false;
-  document.getElementById("add-task-day").value = date;
-  document.getElementById("add-task-initial-Hour").value = "12:00";
-  document.getElementById("add-task-final-Hour").value = "13:00";
-  document.getElementById("add-task-task").value = "";
-  document.getElementById("add-task-description").value = "";
-}
-
-async function onClickAddTask() {
-  document.getElementById("add-task").hidden = true;
-  const day = document.getElementById("add-task-day").value;
-  const initialHour = document.getElementById("add-task-initial-Hour").value;
-  const finalHour = document.getElementById("add-task-final-Hour").value;
-
-  if (finalHour < initialHour) {
-    window.alert("A hora final precisa ser maior que a inicial");
-    return;
-  }
-
-  const bodyData = {
-    task: document.getElementById("add-task-task").value,
-    hexColor: document.getElementById("add-task-color").value,
-    initialDate: `${day}T${initialHour}:00.000Z`,
-    finalDate: `${day}T${finalHour}:00.000Z`,
-    description: document.getElementById("add-task-description").value,
-    checked: document.getElementById("add-task-checked").checked,
-  };
-
-  const result = await tryPostTask(bodyData);
-
-  if (result.error) {
-    return window.alert("Erro ao adicionar a tarefa");
-  }
-
-  getAndRenderTasks();
-}
-
-function onClickBackAddTask() {
-  document.getElementById("add-task").hidden = true;
-}
-
 function onClickPreviousWeek() {
   addDaysOnCalendar(-7);
 }
@@ -254,6 +221,25 @@ function addDaysOnCalendar(days) {
   document.getElementById("home-page-final-date").value = finalDate;
 
   getAndRenderTasks();
+}
+
+/*
+####################################################
+Card Button Functions
+*/
+function onClickAddTaskCardButton(date) {
+  document.getElementById("form-section").hidden = false;
+  document.getElementById("form-title").innerText = "Adicionar Tarefa";
+  document.getElementById("form-input-day").value = date;
+  document.getElementById("form-input-task").value = "";
+  document.getElementById("form-input-initial-Hour").value = "12:00";
+  document.getElementById("form-input-final-Hour").value = "13:00";
+  document.getElementById("form-input-color").value = "#FFFFFF";
+  document.getElementById("form-input-description").value = "";
+  document.getElementById("form-submit-button").innerText = "Criar";
+  document.getElementById("form-submit-button").onclick = () => {
+    onClickSubmitAddTask();
+  };
 }
 
 async function onClickCheckTask(task) {
@@ -279,7 +265,24 @@ async function onClickCheckTask(task) {
 }
 
 function onClickEditTask(task) {
-  window.alert("Edit Task: " + task._id);
+  document.getElementById("form-section").hidden = false;
+  document.getElementById("form-title").innerText = "Editar Tarefa";
+  document.getElementById("form-input-day").value =
+    task.initialDate.split("T")[0];
+  document.getElementById("form-input-task").value = task.task;
+  document.getElementById("form-input-initial-Hour").value =
+    task.initialDate.slice(11, 16);
+  document.getElementById("form-input-final-Hour").value = task.finalDate.slice(
+    11,
+    16
+  );
+  document.getElementById("form-input-color").value = task.hexColor.slice(0, 7);
+  document.getElementById("form-input-description").value = task.description;
+  document.getElementById("form-input-checked").checked = task.checked;
+  document.getElementById("form-submit-button").innerText = "Editar";
+  document.getElementById("form-submit-button").onclick = () => {
+    onClickSubmitEditTask(task._id);
+  };
 }
 
 async function onClickDeleteTask(task) {
@@ -290,6 +293,72 @@ async function onClickDeleteTask(task) {
   }
 
   document.getElementById(task._id).remove();
+}
+
+/*
+####################################################
+Form Functions
+*/
+async function onClickSubmitAddTask() {
+  document.getElementById("form-section").hidden = true;
+  const day = document.getElementById("form-input-day").value;
+  const initialHour = document.getElementById("form-input-initial-Hour").value;
+  const finalHour = document.getElementById("form-input-final-Hour").value;
+
+  if (finalHour < initialHour) {
+    window.alert("A hora final precisa ser maior que a inicial");
+    return;
+  }
+
+  const bodyData = {
+    task: document.getElementById("form-input-task").value,
+    hexColor: document.getElementById("form-input-color").value,
+    initialDate: `${day}T${initialHour}:00.000Z`,
+    finalDate: `${day}T${finalHour}:00.000Z`,
+    description: document.getElementById("form-input-description").value,
+    checked: document.getElementById("form-input-checked").checked,
+  };
+
+  const result = await tryPostTask(bodyData);
+
+  if (result.error) {
+    return window.alert("Erro ao adicionar a tarefa");
+  }
+
+  getAndRenderTasks();
+}
+
+async function onClickSubmitEditTask(taskId) {
+  document.getElementById("form-section").hidden = true;
+  const day = document.getElementById("form-input-day").value;
+  const initialHour = document.getElementById("form-input-initial-Hour").value;
+  const finalHour = document.getElementById("form-input-final-Hour").value;
+
+  if (finalHour < initialHour) {
+    window.alert("A hora final precisa ser maior que a inicial");
+    return;
+  }
+
+  const bodyData = {
+    task: document.getElementById("form-input-task").value,
+    initialDate: `${day}T${initialHour}:00.000Z`,
+    finalDate: `${day}T${finalHour}:00.000Z`,
+    hexColor: document.getElementById("form-input-color").value,
+    description: document.getElementById("form-input-description").value,
+    checked: document.getElementById("form-input-checked").checked,
+  };
+
+  const result = await tryPutTask(bodyData, taskId);
+
+  if (result.error) {
+    return window.alert("Erro ao editar a tarefa");
+  }
+
+  getAndRenderTasks();
+}
+
+function onClickBackForm() {
+  document.getElementById("form-section").hidden = true;
 }
 
 /*

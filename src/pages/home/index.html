@@ -49,59 +49,62 @@
       <div id="home-page-lists-container" class="home-page-lists-container">
     </main>
 
-    <div id="add-task" class="add-task-container" hidden="true">
+    <section id="form-section" class="form-section" hidden="true">
       <aside class="left-aside"></aside>
       <aside class="right-aside">
-        <div class="add-task-content-container">
-          <h4>Adicionar Tarefa</h4>
-          <input id="add-task-day" class="home-page-date-input" type="date" />
-          <input id="add-task-task" type="text" placeholder="Tarefa" />
-          <div class="add-task-hour-container">
+        <form id="task-form" class="form-container">
+          <h4 id="form-title">Adicionar Tarefa</h4>
+          <input id="form-input-day" class="home-page-date-input" type="date" required/>
+          <input id="form-input-task" type="text" placeholder="Tarefa" required/>
+          <div class="form-hour-container">
             <input
-              class="add-task-time-input"
-              id="add-task-initial-Hour"
+              class="form-input-time"
+              id="form-input-initial-Hour"
               type="time"
+              required
             />
             <h4>&rarr;</h4>
             <input
-              class="add-task-time-input"
-              id="add-task-final-Hour"
+              class="form-input-time"
+              id="form-input-final-Hour"
               type="time"
+              required
             />
           </div>
-          <div class="add-task-color-container">
+          <div class="form-color-container">
             <h5>Cor:</h5>
             <input
-            id="add-task-color"
-            class="add-task-color"
+            id="form-input-color"
+            class="form-input-color"
             list="app-colors"
             type="color"
-            value="#FFFFFF"
+            required
           />
           </div>
           <input
-            id="add-task-description"
+            id="form-input-description"
             type="text"
             placeholder="Descrição"
           />
-          <div class="add-task-checkbox-container">
+          <div class="form-checkbox-container">
             <h5>Concluída: </h5>
-            <input id="add-task-checked" type="checkbox" />
+            <input id="form-input-checked" type="checkbox"/>
           </div>
-          <div class="add-task-button-container">
+          <div class="form-button-container">
             <button
-              onclick="onClickBackAddTask()"
-              class="add-task-white-button"
+              onclick="onClickBackForm()"
+              class="form-white-button"
+              type="reset"
             >
               Voltar
             </button>
-            <button onclick="onClickAddTask()" class="add-task-salmon-button">
+            <button id="form-submit-button" class="form-salmon-button" type="submit">
               Criar
             </button>
           </div>
-        </div>
+        </form>
       </aside>
-    </div>
+    </section>
 
     <div id="home-page-loading" class="loading-content">
       <div class="loading-animation">

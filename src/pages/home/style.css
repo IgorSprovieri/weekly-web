@@ -160,12 +160,12 @@ aside.right-aside {
   animation-fill-mode: forwards;
 }
 
-.add-task-container {
+.form-section {
   height: 100vh;
   width: 100vw;
   position: fixed;
 }
-.add-task-content-container {
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,7 +178,7 @@ aside.right-aside {
   padding-bottom: 8px;
 }
 
-.add-task-hour-container {
+.form-hour-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -187,11 +187,11 @@ aside.right-aside {
   width: 280px;
 }
 
-.add-task-time-input {
+.form-input-time {
   width: 80px;
   color: black;
 }
-.add-task-color-container {
+.form-color-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -200,25 +200,25 @@ aside.right-aside {
   width: 280px;
 }
 
-.add-task-color {
+.form-input-color {
   width: 200px;
   height: 42px;
   padding: 4px 4px;
 }
 
-.add-task-color::-webkit-color-swatch {
+.form-input-color::-webkit-color-swatch {
   border: none;
   border-radius: 50px;
   padding: 0;
 }
 
-.add-task-color::-webkit-color-swatch-wrapper {
+.form-input-color::-webkit-color-swatch-wrapper {
   border: none;
   border-radius: 50px;
   padding: 0;
 }
 
-.add-task-checkbox-container {
+.form-checkbox-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -227,7 +227,7 @@ aside.right-aside {
   width: 280px;
 }
 
-.add-task-button-container {
+.form-button-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -236,7 +236,7 @@ aside.right-aside {
   width: 90%;
 }
 
-button.add-task-salmon-button {
+button.form-salmon-button {
   font-family: "Comfortaa", cursive;
   font-size: 22px;
   font-weight: 400;
@@ -251,7 +251,7 @@ button.add-task-salmon-button {
   padding: 0px;
 }
 
-button.add-task-white-button {
+button.form-white-button {
   font-family: "Comfortaa", cursive;
   font-size: 22px;
   font-weight: 400;
@@ -264,12 +264,6 @@ button.add-task-white-button {
   border-radius: 25px;
   margin: 0px;
   padding: 0px;
-}
-
-.loading-hidden-content {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
 }
 
 .loading-content {
