@@ -373,30 +373,30 @@ footer.info-footer {
 
   .home-page-week-days-container {
     justify-content: flex-start;
-    width: 1100px;
+    width: 1234px;
     margin-top: 16px;
   }
 
   .home-page-week-day {
-    width: 140px;
+    width: 160px;
   }
 
   .home-page-lists-container {
     justify-content: flex-start;
-    width: 1100px;
+    width: 1234px;
   }
 
   .home-page-list-cards-container {
-    width: 140px;
+    width: 160px;
   }
 
   .home-page-button-card {
-    width: 140px;
+    width: 160px;
     height: 90px;
   }
 
   .home-page-add-button-card {
-    width: 140px;
+    width: 160px;
     height: 90px;
   }
 
