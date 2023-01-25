@@ -67,24 +67,32 @@ async function getAppColors() {
 async function setInitialDate() {
   const dateInput = document.getElementById("home-page-date-input");
   let previousMonday = new Date();
+
   previousMonday.setDate(
     previousMonday.getDate() - ((previousMonday.getDay() + 6) % 7)
   );
 
-  dateInput.value = previousMonday.toISOString().split("T")[0];
+  const year = previousMonday.getFullYear();
+  const month = previousMonday.getMonth() + 1;
+  const day = previousMonday.getDate();
+
+  if (month < 10) {
+    dateInput.value = `${year}-0${month}-${day}`;
+  } else {
+    dateInput.value = `${year}-${month}-${day}`;
+  }
+
   dateInput.addEventListener("change", async () => {
     const dateInput = document.getElementById("home-page-date-input");
     const finalDate = await tryGetAddDays(dateInput.value, 6);
-    document.getElementById("home-page-final-date").value = finalDate
-      .toISOString()
-      .split("T")[0];
+    document.getElementById("home-page-final-date").value =
+      finalDate.split("T")[0];
     getAndRenderTasks();
   });
 
-  const finalDate = await tryGetAddDays(previousMonday, 6);
-  document.getElementById("home-page-final-date").value = finalDate
-    .toISOString()
-    .split("T")[0];
+  const finalDate = await tryGetAddDays(dateInput.value, 6);
+  document.getElementById("home-page-final-date").value =
+    finalDate.split("T")[0];
 }
 
 async function getAndRenderTasks() {
@@ -180,10 +188,9 @@ async function addDaysOnCalendar(days) {
   const startDate = await tryGetAddDays(dateInput.value, days);
   const finalDate = await tryGetAddDays(startDate, 6);
 
-  dateInput.value = startDate.toISOString().split("T")[0];
-  document.getElementById("home-page-final-date").value = finalDate
-    .toISOString()
-    .split("T")[0];
+  dateInput.value = startDate.split("T")[0];
+  document.getElementById("home-page-final-date").value =
+    finalDate.split("T")[0];
 
   getAndRenderTasks();
 }
@@ -417,7 +424,7 @@ const tryGetAddDays = async (date, days) => {
       `https://weekly.herokuapp.com/addDays/?date=${date}T08%3A00%3A00.000Z&days=${days}`
     );
     const data = await result.json();
-    return new Date(data.result);
+    return data.result;
   } catch (error) {
     return { error };
   }
