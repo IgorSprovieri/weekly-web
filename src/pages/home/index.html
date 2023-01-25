@@ -20,7 +20,12 @@
       </button>
     </header>
     <div class="home-page-data-input-container">
-      <button onclick="onClickPreviousWeek()" class="small-button">&larr;</button>
+      <button
+        onclick="onClickPreviousWeek()"
+        class="small-button hidden-on-mobile"
+      >
+        &larr;
+      </button>
       <input
         class="home-page-date-input"
         type="date"
@@ -32,9 +37,10 @@
         readonly="readonly"
         id="home-page-final-date"
       />
-      <button onclick="onClickNextWeek()" class="small-button">&rarr;</button>
+      <button onclick="onClickNextWeek()" class="small-button hidden-on-mobile">
+        &rarr;
+      </button>
     </div>
-
     <main>
       <div class="home-page-week-days-container">
         <h5 id="week-day-0" class="home-page-week-day">S</h5>
@@ -45,16 +51,28 @@
         <h5 id="week-day-5" class="home-page-week-day">S</h5>
         <h5 id="week-day-6" class="home-page-week-day">D</h5>
       </div>
-      <div id="home-page-lists-container" class="home-page-lists-container">
+      <div
+        id="home-page-lists-container"
+        class="home-page-lists-container"
+      ></div>
     </main>
 
-    <section id="form-section" class="form-section" hidden="true">
-      <section class="black-background"></section>
-      <aside class="right-aside">
-        <form id="task-form" class="form-container">
+    <section id="form-section" class="form-section fadeIn" hidden>
+      <div class="form-container">
+        <form id="task-form" class="form-content-container transformRight">
           <h4 id="form-title">Adicionar Tarefa</h4>
-          <input id="form-input-day" class="home-page-date-input" type="date" required/>
-          <input id="form-input-task" type="text" placeholder="Tarefa" required/>
+          <input
+            id="form-input-day"
+            class="home-page-date-input"
+            type="date"
+            required
+          />
+          <input
+            id="form-input-task"
+            type="text"
+            placeholder="Tarefa"
+            required
+          />
           <div class="form-hour-container">
             <input
               class="form-input-time"
@@ -73,12 +91,12 @@
           <div class="form-color-container">
             <h5>Cor:</h5>
             <input
-            id="form-input-color"
-            class="form-input-color"
-            list="app-colors"
-            type="color"
-            required
-          />
+              id="form-input-color"
+              class="form-input-color"
+              list="app-colors"
+              type="color"
+              required
+            />
           </div>
           <input
             id="form-input-description"
@@ -86,42 +104,75 @@
             placeholder="Descrição"
           />
           <div class="form-checkbox-container">
-            <h5>Concluída: </h5>
-            <input id="form-input-checked" type="checkbox"/>
+            <h5>Concluída:</h5>
+            <input
+              id="form-input-checked"
+              class="form-input-checkbox"
+              type="checkbox"
+            />
           </div>
           <div class="form-button-container">
             <button
-              onclick="onClickBackForm()"
+              onclick="closeForm()"
               class="form-white-button"
               type="reset"
             >
               Voltar
             </button>
-            <button id="form-submit-button" class="form-salmon-button" type="submit">
+            <button
+              id="form-submit-button"
+              class="form-salmon-button"
+              type="submit"
+            >
               Criar
             </button>
           </div>
         </form>
-      </aside>
+      </div>
     </section>
 
-    <section id="info-section" class="info-section" hidden="true">
-      <section class="black-background"></section>
-      <footer>
-        <div class="info-container">
-          <h4>Descrição</h4>
-          <h5 id="info-container-description" class="info-description"></h5>
+    <footer id="info-footer" class="info-footer" hidden>
+      <div class="info-flex">
+        <div id="info-container" class="info-container transformUp">
           <div class="info-button-container">
-            <button
-            onclick="onClickHiddenInfoSection()"
-            class="form-white-button"
-            >
-            Voltar
+            <button onclick="closeInfoFooter()" class="small-button">
+              Voltar
+            </button>
+          </div>
+          <h5 id="info-footer-task">Tarefa</h5>
+          <h5 id="info-footer-time">00:00 - 00:00</h5>
+          <h5 id="info-footer-description" class="info-description">
+            Sem descrição
+          </h5>
+          <div class="info-buttons-container">
+            <button id="info-check-button" class="info-button">
+              <img
+                src="../../../public/check.svg"
+                alt=""
+                class="info-button-img"
+              />
+              <p>Concluir</p>
+            </button>
+            <button id="info-edit-button" class="info-button">
+              <img
+                src="../../../public/edit.svg"
+                alt=""
+                class="info-button-img"
+              />
+              <p>Editar</p>
+            </button>
+            <button id="info-delete-button" class="info-button">
+              <img
+                src="../../../public/delete.svg"
+                alt=""
+                class="info-button-img"
+              />
+              <p>Deletar</p>
             </button>
           </div>
         </div>
-      </footer>
-    </section>
+      </div>
+    </footer>
 
     <div id="home-page-loading" class="loading-content">
       <div class="loading-animation">
@@ -130,7 +181,6 @@
       </div>
     </div>
 
-    <datalist id="app-colors">
-    </datalist>
+    <datalist id="app-colors"> </datalist>
   </body>
 </html>

@@ -24,3 +24,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
+@media only screen and (max-device-width: 450px) {
+  .button-container {
+    flex-direction: column-reverse;
+    width: 100vw;
+    height: 116px;
+  }
+}

@@ -14,3 +14,15 @@
   align-items: center;
   justify-content: space-between;
 }
+
+@media only screen and (max-device-width: 450px) {
+  .title-container {
+    margin: 80px;
+    width: 95vw;
+  }
+  .button-container {
+    flex-direction: column-reverse;
+    width: 100vw;
+    height: 116px;
+  }
+}

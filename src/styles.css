@@ -230,11 +230,25 @@ ANIMATIONS
 .enterPage-animation {
   animation-name: fadeIn;
   animation-duration: 4s;
+  animation-fill-mode: forwards;
 }
 
 .outPage-animation {
   animation-name: fadeOut;
   animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadeIn {
@@ -281,5 +295,84 @@ button:not(hover) {
   }
   100% {
     transform: translateY(0px);
+  }
+}
+
+.transformUp {
+  animation-name: transformUp;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.transformDown {
+  animation-name: transformDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes transformUp {
+  0% {
+    transform: translateY(500px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes transformDown {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(500px);
+  }
+}
+
+.transformRight {
+  animation-name: transformRight;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.transformLeft {
+  animation-name: transformLeft;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes transformRight {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes transformLeft {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(500px);
+  }
+}
+
+@media only screen and (max-device-width: 450px) {
+  .hidden-on-mobile {
+    display: none;
+  }
+
+  h1 {
+    font-size: 42px;
+    line-height: 50px;
+  }
+
+  h2 {
+    font-size: 34px;
+  }
+
+  h2.small-icon {
+    font-size: 24px;
   }
 }

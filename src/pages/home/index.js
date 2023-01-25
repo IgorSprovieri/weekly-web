@@ -123,7 +123,7 @@ async function getAndRenderTasks() {
     tasks.map((task) => {
       if (task.initialDate > initialHour && task.initialDate < finalHour) {
         const taskButton = document.createElement("button");
-        taskButton.classList.add("home-page-card");
+        taskButton.classList.add("home-page-button-card");
         taskButton.id = task._id;
         task.hexColor = task.hexColor + "ab";
         taskButton.style.backgroundColor = task.hexColor;
@@ -143,44 +143,10 @@ async function getAndRenderTasks() {
           )}</p>`;
         }
 
-        const imagesContainer = document.createElement("div");
-        const checkImg = document.createElement("img");
-        const editImg = document.createElement("img");
-        const deleteImg = document.createElement("img");
-        const infoImg = document.createElement("img");
-
-        deleteImg.src = "../../../public/delete.svg";
-        checkImg.src = "../../../public/check.svg";
-        editImg.src = "../../../public/edit.svg";
-        infoImg.src = "../../../public/info.svg";
-
-        deleteImg.style.height = "16px";
-        checkImg.style.height = "16px";
-        editImg.style.height = "16px";
-        infoImg.style.height = "16px";
-
-        editImg.style.margin = "0px 6px 0px 3px";
-        infoImg.style.margin = "0px 3px 0px 6px";
-
-        checkImg.onclick = () => {
-          onClickCheckTask(task);
-        };
-        editImg.onclick = () => {
-          onClickEditTask(task);
-        };
-        deleteImg.onclick = () => {
-          onClickDeleteTask(task);
-        };
-        infoImg.onclick = () => {
-          onClickinfoTask(task);
+        taskButton.onclick = () => {
+          openInfoFooter(task);
         };
 
-        imagesContainer.appendChild(checkImg);
-        imagesContainer.appendChild(infoImg);
-        imagesContainer.appendChild(editImg);
-        imagesContainer.appendChild(deleteImg);
-
-        taskButton.appendChild(imagesContainer);
         listDayElement.appendChild(taskButton);
       }
     });
@@ -189,6 +155,7 @@ async function getAndRenderTasks() {
     addButton.innerHTML = "<h5>+</h5>";
     addButton.classList.add("home-page-add-button-card");
     addButton.onclick = () => {
+      openForm();
       onClickAddTaskCardButton(day.toString());
     };
     listDayElement.appendChild(addButton);
@@ -225,8 +192,8 @@ async function addDaysOnCalendar(days) {
 ####################################################
 Card Button Functions
 */
+
 function onClickAddTaskCardButton(date) {
-  document.getElementById("form-section").hidden = false;
   document.getElementById("form-title").innerText = "Adicionar Tarefa";
   document.getElementById("form-input-day").value = date;
   document.getElementById("form-input-task").value = "";
@@ -240,86 +207,12 @@ function onClickAddTaskCardButton(date) {
   };
 }
 
-async function onClickDeleteTask(task) {
-  const result = await tryDeleteTask(task._id);
-
-  if (result.error) {
-    return window.alert("Não foi possível deletar a tarefa");
-  }
-
-  document.getElementById(task._id).remove();
-}
-
-function onClickinfoTask(task) {
-  const infoSection = document.getElementById("info-section");
-  infoSection.hidden = false;
-  const infoDescription = document.getElementById("info-container-description");
-  if (task.description == "") {
-    infoDescription.innerText = "Sem descrição";
-  } else {
-    infoDescription.innerText = task.description;
-  }
-}
-
-async function onClickCheckTask(task) {
-  const bodyData = {
-    checked: !task.checked,
-  };
-
-  const result = await tryPutTask(bodyData, task._id);
-
-  if (result.error) {
-    return window.alert("Não foi possível concluir a tarefa");
-  }
-
-  task.checked = !task.checked;
-
-  const firstElement = document.getElementById(task._id).firstElementChild;
-
-  if (task.checked == true) {
-    firstElement.innerHTML = `<s>${task.task}</s>`;
-  } else {
-    firstElement.innerHTML = `${task.task}`;
-  }
-}
-
-function onClickEditTask(task) {
-  document.getElementById("form-section").hidden = false;
-  document.getElementById("form-title").innerText = "Editar Tarefa";
-  document.getElementById("form-input-day").value =
-    task.initialDate.split("T")[0];
-  document.getElementById("form-input-task").value = task.task;
-  document.getElementById("form-input-initial-Hour").value =
-    task.initialDate.slice(11, 16);
-  document.getElementById("form-input-final-Hour").value = task.finalDate.slice(
-    11,
-    16
-  );
-  document.getElementById("form-input-color").value = task.hexColor.slice(0, 7);
-  document.getElementById("form-input-description").value = task.description;
-  document.getElementById("form-input-checked").checked = task.checked;
-  document.getElementById("form-submit-button").innerText = "Editar";
-  document.getElementById("form-submit-button").onclick = () => {
-    onClickSubmitEditTask(task._id);
-  };
-}
-
-async function onClickDeleteTask(task) {
-  const result = await tryDeleteTask(task._id);
-
-  if (result.error) {
-    return window.alert("Não foi possível deletar a tarefa");
-  }
-
-  document.getElementById(task._id).remove();
-}
-
 /*
 ####################################################
 Form Functions
 */
 async function onClickSubmitAddTask() {
-  document.getElementById("form-section").hidden = true;
+  closeForm();
   const day = document.getElementById("form-input-day").value;
   const initialHour = document.getElementById("form-input-initial-Hour").value;
   const finalHour = document.getElementById("form-input-final-Hour").value;
@@ -348,7 +241,7 @@ async function onClickSubmitAddTask() {
 }
 
 async function onClickSubmitEditTask(taskId) {
-  document.getElementById("form-section").hidden = true;
+  closeForm();
   const day = document.getElementById("form-input-day").value;
   const initialHour = document.getElementById("form-input-initial-Hour").value;
   const finalHour = document.getElementById("form-input-final-Hour").value;
@@ -376,8 +269,24 @@ async function onClickSubmitEditTask(taskId) {
   getAndRenderTasks();
 }
 
-function onClickBackForm() {
-  document.getElementById("form-section").hidden = true;
+function closeForm() {
+  document.getElementById("task-form").classList.remove("transformRight");
+  document.getElementById("task-form").classList.add("transformLeft");
+  document.getElementById("form-section").classList.remove("fadeIn");
+  document.getElementById("form-section").classList.add("fadeOut");
+
+  setTimeout(() => {
+    document.getElementById("form-section").hidden = true;
+  }, 1000);
+}
+
+function openForm() {
+  document.getElementById("form-section").hidden = false;
+
+  document.getElementById("task-form").classList.remove("transformLeft");
+  document.getElementById("task-form").classList.add("transformRight");
+  document.getElementById("form-section").classList.remove("fadeOut");
+  document.getElementById("form-section").classList.add("fadeIn");
 }
 
 /*
@@ -385,10 +294,117 @@ function onClickBackForm() {
 Info Section Functions
 */
 
-function onClickHiddenInfoSection() {
-  document.getElementById("info-section").hidden = true;
+function closeInfoFooter() {
+  document.getElementById("info-container").classList.remove("transformUp");
+  document.getElementById("info-container").classList.add("transformDown");
+  document.getElementById("info-footer").classList.remove("fadeIn");
+  document.getElementById("info-footer").classList.add("fadeOut");
+
+  setTimeout(() => {
+    document.getElementById("info-footer").hidden = true;
+  }, 1000);
 }
 
+function openInfoFooter(task) {
+  document.getElementById("info-footer").hidden = false;
+  document.getElementById("info-container").classList.remove("transformDown");
+  document.getElementById("info-container").classList.add("transformUp");
+  document.getElementById("info-footer").classList.remove("fadeOut");
+  document.getElementById("info-footer").classList.add("fadeIn");
+
+  const infoTask = document.getElementById("info-footer-task");
+  const infoTime = document.getElementById("info-footer-time");
+  const infoDescription = document.getElementById("info-footer-description");
+
+  if (task.checked == true) {
+    infoTask.innerHTML = `<s>${task.task}</s>`;
+  } else {
+    infoTask.innerText = task.task;
+  }
+
+  infoTime.innerText = `${task.initialDate.slice(
+    11,
+    16
+  )} - ${task.finalDate.slice(11, 16)}`;
+
+  if (task.description == "") {
+    infoDescription.innerText = "Sem descrição";
+  } else {
+    infoDescription.innerText = task.description;
+  }
+
+  const checkButton = document.getElementById("info-check-button");
+  const editbutton = document.getElementById("info-edit-button");
+  const deleteButton = document.getElementById("info-delete-button");
+
+  checkButton.onclick = () => {
+    onClickCheckTask(task);
+  };
+  editbutton.onclick = () => {
+    closeInfoFooter();
+    openForm();
+    onClickEditTask(task);
+  };
+  deleteButton.onclick = () => {
+    closeInfoFooter();
+    onClickDeleteTask(task);
+  };
+}
+
+async function onClickCheckTask(task) {
+  const bodyData = {
+    checked: !task.checked,
+  };
+
+  const result = await tryPutTask(bodyData, task._id);
+
+  if (result.error) {
+    return window.alert("Não foi possível concluir a tarefa");
+  }
+
+  task.checked = !task.checked;
+
+  const firstElement = document.getElementById(task._id).firstElementChild;
+  const infoTask = document.getElementById("info-footer-task");
+
+  if (task.checked == true) {
+    firstElement.innerHTML = `<s>${task.task}</s>`;
+    infoTask.innerHTML = `<s>${task.task}</s>`;
+  } else {
+    firstElement.innerHTML = `${task.task}`;
+    infoTask.innerText = task.task;
+  }
+}
+
+function onClickEditTask(task) {
+  document.getElementById("form-title").innerText = "Editar Tarefa";
+  document.getElementById("form-input-day").value =
+    task.initialDate.split("T")[0];
+  document.getElementById("form-input-task").value = task.task;
+  document.getElementById("form-input-initial-Hour").value =
+    task.initialDate.slice(11, 16);
+  document.getElementById("form-input-final-Hour").value = task.finalDate.slice(
+    11,
+    16
+  );
+  document.getElementById("form-input-color").value = task.hexColor.slice(0, 7);
+  document.getElementById("form-input-description").value = task.description;
+  document.getElementById("form-input-checked").checked = task.checked;
+  document.getElementById("form-submit-button").innerText = "Editar";
+  document.getElementById("form-submit-button").onclick = () => {
+    onClickSubmitEditTask(task._id);
+  };
+}
+
+async function onClickDeleteTask(task) {
+  const result = await tryDeleteTask(task._id);
+
+  if (result.error) {
+    return window.alert("Não foi possível deletar a tarefa");
+  }
+
+  document.getElementById(task._id).remove();
+}
 /*
 ###########################################################
 API Requests
