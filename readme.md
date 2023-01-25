@@ -30,13 +30,12 @@ https://github.com/IgorSprovieri/weekly-web/blob/main/public/preview.mp4
 
 ## Project Progress
 
-The demo is available
+The demo is available for desktop and mobile
 
 ### It's in development
 
 - Forgot and Reset Password Pages
 - Edit Profile Page
-- Media Query for mobile
 
 ## Used Technologies
 
