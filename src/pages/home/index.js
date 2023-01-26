@@ -124,13 +124,11 @@ async function getAndRenderTasks() {
     return days[date.getDay()];
   }
 
-  weekDays.map((weekDay, i) => {
+  weekDays.map((day, i) => {
     document.getElementById("week-day-" + i).innerText = getWeekDay(
-      new Date(weekDay)
+      new Date(day)
     );
-  });
 
-  weekDays.map((day) => {
     const listDayElement = document.createElement("div");
     listDayElement.classList.add("home-page-list-cards-container");
     const initialHour = day + "T00:00:00.000Z";

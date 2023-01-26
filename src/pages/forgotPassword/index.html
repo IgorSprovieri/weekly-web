@@ -9,18 +9,16 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="./index.js"></script>
   </head>
-  <body id="body-element" class="enterPage-animation">
+  <body id="body-element">
     <main id="main-container" class="full-screen">
       <h2>Weekly</h2>
       <section id="input-section" class="input-section">
         <div class="input-box">
-          <h4 class="input-title">Registre-se</h4>
-          <input id="name-input" type="text" placeholder="Nome" />
-          <div class="input-container">
-            <input id="email-input" type="email" placeholder="E-mail" />
-          </div>
-          <h5 hidden id="name-written" class="written-container"></h5>
+          <h4 class="input-title">Redefinir Senha</h4>
+          <input id="email-input" type="email" placeholder="E-mail" />
           <h5 hidden id="email-written" class="written-container"></h5>
+          <input hidden id="token-input" type="text" placeholder="Token" />
+          <h5 hidden id="token-written" class="written-container"></h5>
           <input
             hidden
             id="password-input"
@@ -67,7 +65,7 @@
             <button onclick="addPasswordNumber('0')" class="little-button">
               0
             </button>
-            <button onclick="restartPasswordNumber()" class="little-button">
+            <button onclick="resetPasswordNumber()" class="little-button">
               x
             </button>
           </div>
@@ -80,7 +78,7 @@
         </button>
         <button
           id="continue-button"
-          onclick="onClickContinue()"
+          onclick="sendEmail()"
           class="salmon-button"
         >
           Continuar

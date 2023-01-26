@@ -31,7 +31,6 @@ function onClickContinue() {
     document.getElementById("email-input").hidden = true;
     document.getElementById("name-input").hidden = true;
     document.getElementById("continue-button").hidden = true;
-    document.getElementById("reset-password").hidden = false;
     document.getElementById("name-written").hidden = false;
     document.getElementById("email-written").hidden = false;
     document.getElementById("password-input").hidden = false;
