@@ -84,18 +84,21 @@ async function setInitialDate() {
 
   dateInput.addEventListener("change", async () => {
     const dateInput = document.getElementById("home-page-date-input");
-    const finalDate = await tryGetAddDays(dateInput.value, 6);
-    document.getElementById("home-page-final-date").value =
-      finalDate.split("T")[0];
+    const finalDate = dateFns.addDays(dateInput.value, 6);
+    document.getElementById("home-page-final-date").value = finalDate
+      .toISOString()
+      .split("T")[0];
     getAndRenderTasks();
   });
 
-  const finalDate = await tryGetAddDays(dateInput.value, 6);
-  document.getElementById("home-page-final-date").value =
-    finalDate.split("T")[0];
+  const finalDate = dateFns.addDays(dateInput.value, 6);
+  document.getElementById("home-page-final-date").value = finalDate
+    .toISOString()
+    .split("T")[0];
 }
 
 async function getAndRenderTasks() {
+  const weekDays = [];
   const initialDate = document.getElementById("home-page-date-input").value;
   const finalDate = document.getElementById("home-page-final-date").value;
   const listsContainer = document.getElementById("home-page-lists-container");
@@ -103,13 +106,17 @@ async function getAndRenderTasks() {
   listsContainer.innerHTML = "";
 
   const tasks = await tryGetTasks(initialDate, finalDate);
-  const weekDays = await tryGetListOfDays(initialDate, 7);
 
-  if (tasks.error || weekDays.error) {
+  if (tasks.error) {
     return window.alert("Erro ao carregar as tarefas");
   }
 
   document.getElementById("home-page-loading").style.display = "none";
+
+  for (let i = 0, dateAux = new Date(initialDate); i < 7; i++) {
+    weekDays.push(dateAux);
+    dateAux = dateFns.addDays(dateAux, 1);
+  }
 
   function getWeekDay(date) {
     let days = ["S", "T", "Q", "Q", "S", "S", "D"];
@@ -183,14 +190,15 @@ function onClickNextWeek() {
   addDaysOnCalendar(7);
 }
 
-async function addDaysOnCalendar(days) {
+function addDaysOnCalendar(days) {
   const dateInput = document.getElementById("home-page-date-input");
-  const startDate = await tryGetAddDays(dateInput.value, days);
-  const finalDate = await tryGetAddDays(startDate, 6);
+  const startDate = dateFns.addDays(dateInput.value, days);
+  const finalDate = dateFns.addDays(startDate, 6);
 
-  dateInput.value = startDate.split("T")[0];
-  document.getElementById("home-page-final-date").value =
-    finalDate.split("T")[0];
+  dateInput.value = startDate.toISOString().split("T")[0];
+  document.getElementById("home-page-final-date").value = finalDate
+    .toISOString()
+    .split("T")[0];
 
   getAndRenderTasks();
 }
@@ -416,32 +424,6 @@ async function onClickDeleteTask(task) {
 ###########################################################
 API Requests
 */
-
-const tryGetAddDays = async (date, days) => {
-  try {
-    date = new Date(date).toISOString().split("T")[0];
-    const result = await fetch(
-      `https://weekly.herokuapp.com/addDays/?date=${date}T08%3A00%3A00.000Z&days=${days}`
-    );
-    const data = await result.json();
-    return data.result;
-  } catch (error) {
-    return { error };
-  }
-};
-
-const tryGetListOfDays = async (date, days) => {
-  try {
-    date = new Date(date).toISOString().split("T")[0];
-    const result = await fetch(
-      `https://weekly.herokuapp.com/list-of-days/?date=${date}T08%3A00%3A00.000Z&days=${days}`
-    );
-    const data = await result.json();
-    return data.result;
-  } catch (error) {
-    return { error };
-  }
-};
 
 const tryGetAppColors = async () => {
   try {
