@@ -34,7 +34,6 @@ The demo is available for desktop and mobile
 
 ### It's in development
 
-- Forgot and Reset Password Pages
 - Edit Profile Page
 
 ## Used Technologies
