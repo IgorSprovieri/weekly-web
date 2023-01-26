@@ -22,11 +22,11 @@ function onClickExit() {
 onload Functions
 */
 
-window.onload = async () => {
-  await loadUser();
-  await getAppColors();
-  await setInitialDate();
-  await getAndRenderTasks();
+window.onload = () => {
+  loadUser();
+  getAppColors();
+  setInitialDate();
+  getAndRenderTasks();
 
   const form = document.getElementById("task-form");
   form.onsubmit = (event) => {
@@ -116,6 +116,7 @@ async function getAndRenderTasks() {
   for (let i = 0, dateAux = new Date(initialDate); i < 7; i++) {
     weekDays.push(dateAux);
     dateAux = dateFns.addDays(dateAux, 1);
+    weekDays[i] = weekDays[i].toISOString().split("T")[0];
   }
 
   function getWeekDay(date) {
