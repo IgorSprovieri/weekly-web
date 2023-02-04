@@ -352,6 +352,7 @@ function openInfoFooter(task) {
   const deleteButton = document.getElementById("info-delete-button");
 
   checkButton.onclick = () => {
+    closeInfoFooter();
     onClickCheckTask(task);
   };
   editbutton.onclick = () => {

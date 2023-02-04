@@ -20,6 +20,7 @@ function onClickContinue() {
   document.getElementById("main-container").classList.add("outPage-animation");
 
   setTimeout(() => {
+    document.getElementById("input-section").style.margin = "30px";
     document.getElementById("email-input").hidden = true;
     document.getElementById("continue-button").hidden = true;
     document.getElementById("reset-password").hidden = false;
@@ -34,9 +35,6 @@ function onClickContinue() {
       .getElementById("main-container")
       .classList.add("enterPage-animation");
   }, 1000);
-  document
-    .getElementById("main-container")
-    .classList.remove("enterPage-animation");
 }
 
 function resetPasswordNumber() {
@@ -47,8 +45,16 @@ function resetPasswordNumber() {
 function addPasswordNumber(number) {
   if (password.length < 6) {
     password = password + number;
+
+    const length = password.length;
+    const a = document.getElementById("password-input").value;
+    let startText = "";
+    for (let i = 0; i < length; i++) {
+      startText = startText + "O ";
+    }
+
     document.getElementById("password-input").value =
-      document.getElementById("password-input").value + " O ";
+      startText + a.slice(length * 2, 11);
   }
 
   if (password.length == 6) {

@@ -66,7 +66,7 @@ function getToken() {
     document.getElementById("token-written").hidden = false;
     document.getElementById("token-written").innerText = token;
     document.getElementById("password-input").hidden = false;
-    document.getElementById("input-section").style.margin = "50px";
+    document.getElementById("input-section").style.margin = "30px";
     document.getElementById("number-keyboard").hidden = false;
     document.getElementById("continue-button").hidden = true;
     pageFadeIn();
@@ -81,8 +81,16 @@ function restartPasswordNumber() {
 function addPasswordNumber(number) {
   if (password.length < 6) {
     password = password + number;
+
+    const length = password.length;
+    const a = document.getElementById("password-input").value;
+    let startText = "";
+    for (let i = 0; i < length; i++) {
+      startText = startText + "O ";
+    }
+
     document.getElementById("password-input").value =
-      document.getElementById("password-input").value + " O ";
+      startText + a.slice(length * 2, 11);
   }
 
   if (password.length == 6) {
