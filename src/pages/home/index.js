@@ -22,11 +22,11 @@ function onClickExit() {
 onload Functions
 */
 
-window.onload = () => {
-  loadUser();
-  getAppColors();
+window.onload = async () => {
+  await loadUser();
+  await getAppColors();
   setInitialDate();
-  getAndRenderTasks();
+  await getAndRenderTasks();
 
   const form = document.getElementById("task-form");
   form.onsubmit = (event) => {
@@ -74,7 +74,7 @@ async function setInitialDate() {
 
   dateInput.value = previousMonday.toISOString().split("T")[0];
 
-  dateInput.addEventListener("change", async () => {
+  dateInput.addEventListener("change", () => {
     const dateInput = document.getElementById("home-page-date-input");
     const finalDate = dateFns.addDays(dateInput.value, 6);
     document.getElementById("home-page-final-date").value = finalDate
