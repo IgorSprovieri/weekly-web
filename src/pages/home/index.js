@@ -72,15 +72,7 @@ async function setInitialDate() {
     previousMonday.getDate() - ((previousMonday.getDay() + 6) % 7)
   );
 
-  const year = previousMonday.getFullYear();
-  const month = previousMonday.getMonth() + 1;
-  const day = previousMonday.getDate();
-
-  if (month < 10) {
-    dateInput.value = `${year}-0${month}-${day}`;
-  } else {
-    dateInput.value = `${year}-${month}-${day}`;
-  }
+  dateInput.value = previousMonday.toISOString().split("T")[0];
 
   dateInput.addEventListener("change", async () => {
     const dateInput = document.getElementById("home-page-date-input");
@@ -92,6 +84,7 @@ async function setInitialDate() {
   });
 
   const finalDate = dateFns.addDays(dateInput.value, 6);
+  console.log(finalDate);
   document.getElementById("home-page-final-date").value = finalDate
     .toISOString()
     .split("T")[0];
@@ -135,7 +128,7 @@ async function getAndRenderTasks() {
     const finalHour = day + "T23:59:59.000Z";
 
     tasks.map((task) => {
-      if (task.initialDate > initialHour && task.initialDate < finalHour) {
+      if (task.initialDate >= initialHour && task.initialDate <= finalHour) {
         const taskButton = document.createElement("button");
         taskButton.classList.add("home-page-button-card");
         taskButton.id = task._id;
