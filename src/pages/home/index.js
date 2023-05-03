@@ -44,9 +44,13 @@ async function loadUser() {
     return openPage("../../index.html");
   }
 
-  const result = tryGetUser();
+  const result = await tryGetUser();
 
   if (result.error) {
+    localStorage.removeItem("@Weekly:token");
+    localStorage.removeItem("@Weekly:user_id");
+    localStorage.removeItem("@Weekly:userName");
+    localStorage.removeItem("@Weekly:userEmail");
     return openPage("../../../index.html");
   }
 
@@ -84,7 +88,6 @@ async function setInitialDate() {
   });
 
   const finalDate = dateFns.addDays(dateInput.value, 6);
-  console.log(finalDate);
   document.getElementById("home-page-final-date").value = finalDate
     .toISOString()
     .split("T")[0];
@@ -413,138 +416,3 @@ async function onClickDeleteTask(task) {
 
   document.getElementById(task._id).remove();
 }
-/*
-###########################################################
-API Requests
-*/
-
-const tryGetAppColors = async () => {
-  try {
-    const result = await fetch("https://weekly.herokuapp.com/colors");
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};
-
-// Auth Requests
-const getHeader = () => {
-  const token = localStorage.getItem("@Weekly:token");
-  const email = localStorage.getItem("@Weekly:userEmail");
-
-  const data = new Object();
-  data.token = token;
-  data.email = email;
-
-  return data;
-};
-
-const tryGetUser = async () => {
-  try {
-    const { token, email } = getHeader();
-
-    const result = await fetch("https://weekly.herokuapp.com/user", {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-        email: email,
-      },
-    });
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};
-
-const tryGetTasks = async (initialDate, finalDate) => {
-  try {
-    const { token, email } = getHeader();
-
-    const result = await fetch(
-      `https://weekly.herokuapp.com/task?initialDate=${initialDate}T00%3A00%3A00.000Z&finalDate=${finalDate}T23%3A59%3A59.000Z`,
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-          email: email,
-        },
-      }
-    );
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};
-
-const tryPostTask = async (bodyData) => {
-  try {
-    const { token, email } = getHeader();
-
-    const result = await fetch("https://weekly.herokuapp.com/task", {
-      method: "post",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-        email: email,
-      },
-      body: JSON.stringify(bodyData),
-    });
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};
-
-const tryPutTask = async (bodyData, taskId) => {
-  try {
-    const { token, email } = getHeader();
-
-    const result = await fetch(`https://weekly.herokuapp.com/task/${taskId}`, {
-      method: "put",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-        email: email,
-      },
-      body: JSON.stringify(bodyData),
-    });
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};
-
-const tryDeleteTask = async (taskId) => {
-  try {
-    const { token, email } = getHeader();
-
-    const result = await fetch(`https://weekly.herokuapp.com/task/${taskId}`, {
-      method: "delete",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-        email: email,
-      },
-    });
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};

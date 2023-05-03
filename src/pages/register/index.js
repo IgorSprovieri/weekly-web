@@ -72,7 +72,7 @@ function addPasswordNumber(number) {
 }
 
 async function register() {
-  const result = await tryRegister();
+  const result = await tryRegister(userName, email, password);
 
   if (result.error) {
     window.alert(result.error);
@@ -81,23 +81,3 @@ async function register() {
   }
   openPage("../login/index.html");
 }
-
-const tryRegister = async () => {
-  try {
-    const result = await fetch("https://weekly.herokuapp.com/user", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: userName,
-        email: email,
-        password: password,
-      }),
-    });
-    const user = await result.json();
-    return user;
-  } catch (error) {
-    return { error };
-  }
-};

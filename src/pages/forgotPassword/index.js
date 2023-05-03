@@ -38,7 +38,7 @@ async function sendEmail() {
   }
 
   setTimeout(async () => {
-    const result = await tryForgotPassword();
+    const result = await tryForgotPassword(email);
 
     if (result.error) {
       pageFadeIn();
@@ -99,7 +99,7 @@ function addPasswordNumber(number) {
 }
 
 async function resetPassword() {
-  const result = await tryResetPassword();
+  const result = await tryResetPassword(token, email, passwordå);
 
   if (result.error) {
     window.alert("Token inválido");
@@ -108,41 +108,3 @@ async function resetPassword() {
   }
   openPage("../login/index.html");
 }
-
-const tryForgotPassword = async () => {
-  try {
-    const result = await fetch("https://weekly.herokuapp.com/forgot-password", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-      }),
-    });
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};
-
-const tryResetPassword = async () => {
-  try {
-    const result = await fetch("https://weekly.herokuapp.com/reset-password", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: token,
-        email: email,
-        password: password,
-      }),
-    });
-    const data = await result.json();
-    return data;
-  } catch (error) {
-    return { error };
-  }
-};

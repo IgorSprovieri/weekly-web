@@ -28,14 +28,6 @@ https://github.com/IgorSprovieri/weekly-web/blob/main/public/preview.mp4
 
 <a href="https://igorsprovieri.github.io/weekly-web/">igorsprovieri.github.io/weekly-web/</a>
 
-## Project Progress
-
-The demo is available for desktop and mobile
-
-### It's in development
-
-- Edit Profile Page
-
 ## Used Technologies
 
 - HTML
