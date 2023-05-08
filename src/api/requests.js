@@ -1,4 +1,4 @@
-const baseUrl = "http://ec2-3-144-86-147.us-east-2.compute.amazonaws.com:3333";
+const baseUrl = "https://api.weekly.ispapps.com";
 
 const tryRegister = async (userName, email, password) => {
   try {
