@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="./src/services/storage/index.js"></script>
     <script>
       window.onload = () => {
-        const token = localStorage.getItem("@Weekly:token");
-        const userId = localStorage.getItem("@Weekly:user_id");
-        const userName = localStorage.getItem("@Weekly:userName");
-        const userEmail = localStorage.getItem("@Weekly:userEmail");
+        const userData = getUserData();
+        const { token, userId, userName, userEmail } = userData;
 
         if (!token || !userId || !userName || !userEmail) {
-          return window.open("./src/index.html", "_self");
+          return window.open("./src/pages/index.html", "_self");
         }
 
         return window.open("./src/pages/home/index.html", "_self");

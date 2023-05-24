@@ -71,10 +71,8 @@ async function login() {
     return;
   }
 
-  localStorage.setItem("@Weekly:user_id", result.user_id);
-  localStorage.setItem("@Weekly:userName", result.name);
-  localStorage.setItem("@Weekly:userEmail", result.email);
-  localStorage.setItem("@Weekly:token", result.token);
+  const { user_id, name, email, token } = result;
+  saveUserData(token, user_id, name, email);
 
   openPage("../home/index.html", "_self");
 }

@@ -9,11 +9,7 @@ function openPage(url) {
 }
 
 function onClickExit() {
-  localStorage.removeItem("@Weekly:token");
-  localStorage.removeItem("@Weekly:user_id");
-  localStorage.removeItem("@Weekly:userName");
-  localStorage.removeItem("@Weekly:userEmail");
-
+  deleteUserData();
   openPage("../../index.html");
 }
 
@@ -35,22 +31,16 @@ window.onload = async () => {
 };
 
 async function loadUser() {
-  const token = localStorage.getItem("@Weekly:token");
-  const userId = localStorage.getItem("@Weekly:user_id");
-  const userName = localStorage.getItem("@Weekly:userName");
-  const userEmail = localStorage.getItem("@Weekly:userEmail");
+  const userData = getUserData();
+  const { token, userId, userName, userEmail } = userData;
 
   if (!token || !userId || !userName || !userEmail) {
     return openPage("../../index.html");
   }
 
   const result = await tryGetUser();
-
   if (result.error) {
-    localStorage.removeItem("@Weekly:token");
-    localStorage.removeItem("@Weekly:user_id");
-    localStorage.removeItem("@Weekly:userName");
-    localStorage.removeItem("@Weekly:userEmail");
+    deleteUserData();
     return openPage("../../../index.html");
   }
 
