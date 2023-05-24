@@ -71,7 +71,7 @@ async function login() {
     return;
   }
 
-  const { user_id, name, email, token } = result;
+  const { user_id, name, token } = result;
   saveUserData(token, user_id, name, email);
 
   openPage("../home/index.html", "_self");

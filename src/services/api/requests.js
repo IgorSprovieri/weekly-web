@@ -32,6 +32,7 @@ const tryLogin = async (email, password) => {
         password: password,
       }),
     });
+
     const user = await result.json();
     return user;
   } catch (error) {
