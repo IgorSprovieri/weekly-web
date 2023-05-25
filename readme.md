@@ -4,29 +4,15 @@
 
 ## Description
 
-Weekly is a task manager app builded with HTML, CSS and JS on front-end and Node, Express and Mongoose on back-end
+Weekly is a task manager web app where the main objective is the users organize your week with simple cards
 
-The main objective is the user organizate your week in a visual app with cards
+## Live Application
 
-### To access the API repository:
-
-<a href="https://github.com/IgorSprovieri/Weekly">Weekly - Task Manager API</a>
+<a href="https://weekly.ispapps.com">weekly.ispapps.com/</a>
 
 ## Demo
 
 <img src="./public/preview.gif" alt="Weekly Gif Preview" width="50%">
-
-### Downloading the video
-
-1. Download the file:
-
-```
-https://github.com/IgorSprovieri/weekly-web/blob/main/public/preview.mp4
-```
-
-## Live Application
-
-<a href="https://igorsprovieri.github.io/weekly-web/">igorsprovieri.github.io/weekly-web/</a>
 
 ## Used Technologies
 
@@ -34,9 +20,13 @@ https://github.com/IgorSprovieri/weekly-web/blob/main/public/preview.mp4
 - CSS
 - JS
 
+## Requirements
+
+- Weekly API (<a href="https://github.com/IgorSprovieri/Weekly">github.com/IgorSprovieri/Weekly</a>)
+
 ## Getting Started
 
-1. Clone the repository:
+1. Clone the repo:
 
 ```
 git clone https://github.com/IgorSprovieri/weekly-web
@@ -45,7 +35,7 @@ git clone https://github.com/IgorSprovieri/weekly-web
 2. Open in the explorer the project
 
 ```
-Open the src/index.html file with some browser
+Open the index.html file with some browser
 ```
 
 3. You can create your own user to test
@@ -60,4 +50,4 @@ Click on "Criar Conta" button
 
 ### _Igor Sprovieri Pereira_
 
-Programming student since 2013, started working with Unity C# in 2020, paticipated in 16 team projects as a freelancer and his own game studio. At this time, he was a tutor on Crie Seus Jogos company, helping students and writing articles to company's website. In 2022 he decided to learn web development with HTML, CSS and JS. Actually he is fullstack programmer and he is specializing in react.js, node.js, docker, mongoose, postgres and sequelize.
+In 2013 I learned to programming games how as a hobbie, in 2020 I started to work on this area, I did some freelancers, opened my game studio and I was a writter for over a year on site crieseusjogos.com. In 2022 I decided to go a web developer professional and today I am fullstack with react and node
