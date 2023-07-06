@@ -99,7 +99,7 @@ function addPasswordNumber(number) {
 }
 
 async function resetPassword() {
-  const result = await tryResetPassword(token, email, passwordå);
+  const result = await tryResetPassword(token, email, password);
 
   if (result.error) {
     window.alert("Token inválido");

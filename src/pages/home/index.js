@@ -10,7 +10,7 @@ function openPage(url) {
 
 function onClickExit() {
   deleteUserData();
-  openPage("../../index.html");
+  openPage("../index.html");
 }
 
 /*

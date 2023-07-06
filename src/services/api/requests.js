@@ -42,7 +42,7 @@ const tryLogin = async (email, password) => {
 
 const tryForgotPassword = async (email) => {
   try {
-    const result = await fetch("https://weekly.herokuapp.com/forgot-password", {
+    const result = await fetch(`${baseUrl}/forgot-password`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const tryForgotPassword = async (email) => {
 
 const tryResetPassword = async (token, email, password) => {
   try {
-    const result = await fetch("https://weekly.herokuapp.com/reset-password", {
+    const result = await fetch(`${baseUrl}/reset-password`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
