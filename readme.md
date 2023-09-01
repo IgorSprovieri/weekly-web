@@ -10,7 +10,9 @@ Weekly is a task manager web app where the main objective is the users organize 
 
 <a href="https://weekly.ispapps.com">weekly.ispapps.com/</a>
 
-## Demo
+I deployed this website with Github Pages
+
+## Preview
 
 <img src="./public/preview.gif" alt="Weekly Gif Preview" width="50%">
 
@@ -20,9 +22,15 @@ Weekly is a task manager web app where the main objective is the users organize 
 - CSS
 - JS
 
-## Requirements
+## Main Concepts Applied
 
-- Weekly API (<a href="https://github.com/IgorSprovieri/Weekly">github.com/IgorSprovieri/Weekly</a>)
+- HTML Forms
+- JS DOM
+- API Fetch
+- Local Storage
+- Flexbox
+- Media Query for mobile
+- External Fonts
 
 ## Getting Started
 
@@ -32,10 +40,10 @@ Weekly is a task manager web app where the main objective is the users organize 
 git clone https://github.com/IgorSprovieri/weekly-web
 ```
 
-2. Open in the explorer the project
+2. Open the explorer of the project
 
 ```
-Open the index.html file with some browser
+Open the weekly-web/index.html file with some browser
 ```
 
 3. You can create your own user to test
