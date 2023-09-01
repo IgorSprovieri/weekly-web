@@ -124,7 +124,7 @@ const tryGetTasks = async (initialDate, finalDate) => {
     const { token, email } = getHeader();
 
     const result = await fetch(
-      `${baseUrl}/task?initialDate=${initialDate}T00%3A00%3A00.000Z&finalDate=${finalDate}T23%3A59%3A59.000Z`,
+      `${baseUrl}/tasks?initialDate=${initialDate}T00%3A00%3A00.000Z&finalDate=${finalDate}T23%3A59%3A59.000Z`,
       {
         method: "get",
         headers: {
@@ -135,6 +135,11 @@ const tryGetTasks = async (initialDate, finalDate) => {
       }
     );
     const data = await result.json();
+
+    data?.forEach((task) => {
+      task.hexColor = data?.category?.hexColor || "#39526C";
+    });
+
     return data;
   } catch (error) {
     return { error };
@@ -144,6 +149,11 @@ const tryGetTasks = async (initialDate, finalDate) => {
 const tryPostTask = async (bodyData) => {
   try {
     const { token, email } = getHeader();
+
+    bodyData.category = {
+      name: "any",
+      hexColor: bodyData?.hexColor || "#39526C",
+    };
 
     const result = await fetch(`${baseUrl}/task`, {
       method: "post",
@@ -157,6 +167,7 @@ const tryPostTask = async (bodyData) => {
       },
       body: JSON.stringify(bodyData),
     });
+
     const data = await result.json();
     return data;
   } catch (error) {
@@ -167,6 +178,13 @@ const tryPostTask = async (bodyData) => {
 const tryPutTask = async (bodyData, taskId) => {
   try {
     const { token, email } = getHeader();
+
+    if (bodyData?.hexColor) {
+      bodyData.category = {
+        name: "any",
+        hexColor: bodyData?.hexColor,
+      };
+    }
 
     const result = await fetch(`${baseUrl}/task/${taskId}`, {
       method: "put",
